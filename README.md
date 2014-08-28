@@ -4,7 +4,9 @@ T4
 Welcome to the Tap Twist Tunes project.
 
 Run this the first time:
-https://github.com/zaclolz/T4.git
+
+git clone https://github.com/zaclolz/T4.git
+
 to add files youve changed for commital
 
 git add .
