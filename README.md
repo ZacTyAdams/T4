@@ -12,7 +12,7 @@ to add files youve changed for commital
 git add .
 This will add all changed files. Then run
 
-git commit -m "What I learned in boating school issss......"
+git commit -m "Enter the changes you made here"
 This will commit the files. But for it to really matter, you need to run
 
 git push -u origin master
