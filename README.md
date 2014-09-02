@@ -24,3 +24,6 @@ This will send all files to the server.
 Also to get the latest changes, run: 
 
 `git pull`
+
+Commit Test:
+Austin
