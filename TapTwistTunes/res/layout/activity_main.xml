@@ -9,8 +9,39 @@
     tools:context="com.example.taptwisttunes.MainActivity" >
 
     <TextView
+        android:id="@+id/Title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Music Player"
+        android:textSize="45sp" />
+
+    <Button
+        android:id="@+id/sButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_below="@+id/Title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
+        android:gravity="center"
+        android:text="Mp3 Select" />
+
+    <TextView
+        android:id="@+id/cPlaying"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:textSize="20sp"
+        android:text="No music playing" />
+
+    <ListView
+        android:id="@+id/sList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Title"
+        android:layout_below="@+id/cPlaying"
+        android:layout_marginTop="36dp" >
+    </ListView>
 
 </RelativeLayout>
