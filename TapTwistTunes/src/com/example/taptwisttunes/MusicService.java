@@ -12,7 +12,7 @@ import android.net.Uri;
 import android.os.Binder;
 import android.os.PowerManager;
 import android.util.Log;
-import android.view.View;;
+import android.widget.TextView;
 
 
 
@@ -21,26 +21,18 @@ MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener, MediaPlayer.OnCompl
 {
 	private MediaPlayer player; // Here is the media player
 	private ArrayList<Song> songs; //Here is the song list
-	private int sPos; // This is a instance variable counter for the current song position
+	private int songPosn; // This is a instance variable counter for the current song position
+	TextView current;
+	
 	
 	private final IBinder musicBind = new MusicBinder();
 
 	public void onCreate(){ // setup to creating the service when started
 		super.onCreate(); // Create the service
-		sPos=0; // Setting the song position counter
+		songPosn=0; // Setting the song position counter
 		player = new MediaPlayer(); //creating the media player
 		
 		initMusicPlayer();
-	}
-	
-	public void setList(ArrayList<Song> theSongs){ //This method passes the song list from main activity
-		songs = theSongs;
-	}
-	
-	public class MusicBinder extends Binder{ //works with setList to help interaction between mainactivity and service classes
-		MusicService getService(){
-			return MusicService.this;
-		}
 	}
 	
 	public void initMusicPlayer(){ //method that initializes the MediaPlayer class and sets preferences for the player
@@ -54,6 +46,16 @@ MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener, MediaPlayer.OnCompl
 		
 	}
 	
+	public void setList(ArrayList<Song> theSongs){ //This method passes the song list from main activity
+		songs = theSongs;
+	}
+	
+	public class MusicBinder extends Binder{ //works with setList to help interaction between mainactivity and service classes
+		MusicService getService(){
+			return MusicService.this;
+		}
+	}
+	
 	@Override
 	public IBinder onBind(Intent intent) { //Controls binding
 		return musicBind;
@@ -65,35 +67,35 @@ MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener, MediaPlayer.OnCompl
 		return false;
 	}
 
-	public void playSong(){ //this method plays the song by retrieving ID and modeling it as uri
-		//player.reset(); //resets media player
+	public String playSong(){ //this method plays the song by retrieving ID and modeling it as uri
+		
+		player.reset(); //resets media player
 		System.out.println("Reset worked");
-		Song playSong = songs.get(sPos); // retrieves song to be played
+		Song playSong = songs.get(songPosn); // retrieves song to be played
+		System.out.println("fuck this app");
 		System.out.println(playSong);
 		long currSong = playSong.getId();
 		System.out.println("about to load song");
 		Uri trackUri = ContentUris.withAppendedId(android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, currSong);	
-		System.out.println(trackUri);
-		System.out.println(trackUri.toString());
+		//System.out.println(trackUri);
+		//System.out.println(trackUri.toString());
+		System.out.println(playSong.getTitle());
+		
 		//try block not sure if uri will work as a data source
 		
 		try{
-			player.setDataSource(MusicService.this, trackUri);
+			player.setDataSource(getApplicationContext(), trackUri);
 		}
 		catch(Exception e){
 			Log.e("Music Service", "There has been an error setting the data source", e);
 		} 
 		
-		try{
-			player.prepareAsync();
-		}
-		catch(IllegalStateException ise){
-			System.out.println("SHeeeeiittt nigga it dont work");
-		}
+		player.prepareAsync();
+		return playSong.getTitle();
 	}
 	
 	public void setSong(int songIndex){ //this method allows selection of the current song
-		sPos = songIndex;
+		songPosn = songIndex;
 	}
 	
 	@Override

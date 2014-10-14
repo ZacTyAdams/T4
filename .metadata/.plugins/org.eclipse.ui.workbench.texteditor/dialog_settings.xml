@@ -2,9 +2,9 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="263" key="DIALOG_WIDTH"/>
-		<item value="346" key="DIALOG_Y_ORIGIN"/>
+		<item value="300" key="DIALOG_Y_ORIGIN"/>
 		<item value="399" key="DIALOG_HEIGHT"/>
-		<item value="772" key="DIALOG_X_ORIGIN"/>
+		<item value="61" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Lucida Grande|11.0|0|COCOA|1|LucidaGrande" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
@@ -13,12 +13,26 @@
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="mServe" key="selection"/>
+		<item value="currSong" key="selection"/>
 		<list key="findhistory">
-			<item value="mServe"/>
-			<item value="mService"/>
+			<item value="cSong"/>
+			<item value="aView"/>
+			<item value="sView"/>
+			<item value="sInf"/>
+			<item value="plSong"/>
+			<item value="sPos"/>
+			<item value="mCursor"/>
+			<item value="mUri"/>
 		</list>
 		<list key="replacehistory">
+			<item value="currSong"/>
+			<item value="currentSong"/>
+			<item value="artistView"/>
+			<item value="songView"/>
+			<item value="songInf"/>
+			<item value="playSong"/>
+			<item value="songPosn"/>
+			<item value="musicCursor"/>
 		</list>
 	</section>
 </section>

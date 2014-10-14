@@ -7,10 +7,10 @@ public class Song {
 	private String title;
 	private String artist;
 	
-	public Song(long sId, String sTitle, String sArtist) { //this method assigns the variables a value
-		id = sId;
-		title = sTitle;
-		artist = sArtist;
+	public Song(long songID, String songTitle, String songArtist) { //this method assigns the variables a value
+		id = songID;
+		title = songTitle;
+		artist = songArtist;
 	}
 	
 	//these methods retrieve the information of the audio files

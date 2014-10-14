@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import com.example.taptwisttunes.MusicService.MusicBinder;
-import com.example.taptwisttunes.MusicService;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -18,6 +17,7 @@ import android.widget.ListView;
 import android.net.Uri;
 import android.content.ContentResolver;
 import android.database.Cursor;
+import android.app.Activity;
 
 import android.os.IBinder;
 import android.content.ComponentName;
@@ -28,11 +28,11 @@ import android.content.ServiceConnection;
 public class MainActivity extends ActionBarActivity {
 	
 	private ArrayList<Song> songList;
-	private ListView sView;
+	private ListView songView;
 	
-	private MusicService mServe;
-	private Intent pIntent;
-	private boolean mBound = false;
+	private MusicService musicSrv;
+	private Intent playIntent;
+	private boolean musicBound = false;
 	
 	Button select; //Declaring the selection button
 	TextView current; //Declaring the text view for the current playing song
@@ -41,86 +41,62 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
         select = (Button) findViewById(R.id.sButton); //initialization of select button for future use
         current = (TextView) findViewById(R.id.cPlaying); //initialization of the currently playing text view
-        sView = (ListView) findViewById(R.id.sList); //initialization of the selection list
+        songView = (ListView) findViewById(R.id.song_list); //initialization of the selection list
         songList = new ArrayList<Song>(); //initialization of the list array
-        mServe = new MusicService();
+        getSongList();
         
+        Collections.sort(songList, new Comparator<Song>(){
+			public int compare(Song a, Song b){
+				return a.getTitle().compareTo(b.getTitle());
+			}
+		});
+        
+        SongAdapter songAdt = new SongAdapter(this, songList);
+		songView.setAdapter(songAdt);
         
         select.setOnClickListener(new View.OnClickListener() { //This function will eventually open up a file browser to select a audio file
 			
 			@Override
 			public void onClick(View v) {
-				current.setText("The button is working");
 				
 			}
-		});
-        
-        getSongList(); //Compiling the song list here
-        Collections.sort(songList, new Comparator<Song>(){
-        	public int compare(Song a, Song b){
-        		return a.getTitle().compareTo(b.getTitle());
-        	}
-        });
-        
-        SongAdapter sAdapt = new SongAdapter(this, songList);
-        sView.setAdapter(sAdapt);
-        
-    }
-    
-    protected void onStart(){ //This makes sure the MusicService is started when the main activity starts
-    	super.onStart();
-    	if(pIntent == null){
-    		pIntent = new Intent(this, MusicService.class);
-    		bindService(pIntent, musicConnection, Context.BIND_AUTO_CREATE);
-    		startService(pIntent);
-    	}
+		});        
     }
     
     private ServiceConnection musicConnection = new ServiceConnection(){
     	@Override
     	public void onServiceConnected(ComponentName name, IBinder service){
     		MusicBinder binder = (MusicBinder) service; 
-    		mServe = binder.getService(); //this gets the service
-    		// mServe.setList(songList); //this passes the list to service
-    		mBound = true;
+    		musicSrv = binder.getService(); //this gets the service
+    		musicSrv.setList(songList); //this passes the list to service
+    		musicBound = true;
     	}
     	@Override
     	public void onServiceDisconnected(ComponentName name){
-    		mBound = false;
+    		musicBound = false;
     	}
     };
     
-    public void getSongList(){ //this method will compile the song list
-    	ContentResolver mResolver = getContentResolver(); //this creates a content resolver instance
-    	Uri mUri = android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI; //this creates a URI that will retrieve song info
-    	Cursor mCursor = mResolver.query(mUri, null, null, null, null); //this creates the cursor to sift through the device storage
-    	
-    	if(mCursor != null && mCursor.moveToFirst()){
-    		int tColumn = mCursor.getColumnIndex(android.provider.MediaStore.Audio.Media.TITLE); //retrieving the song title
-    		int iColumn = mCursor.getColumnIndex(android.provider.MediaStore.Audio.Media._ID); //retrieving the song id
-    		int aColumn = mCursor.getColumnIndex(android.provider.MediaStore.Audio.Media.ARTIST); //retrieving the artist
-    		
-    		do{ //this will add songs to the list
-    			long thisId = mCursor.getLong(iColumn);
-    			String thisTitle = mCursor.getString(tColumn);
-    			String thisArtist = mCursor.getString(aColumn);
-    			songList.add(new Song(thisId, thisTitle, thisArtist));
-    		}
-    		while (mCursor.moveToNext()); //moves the cursor to the next song
-    		
-    		System.out.println("setList function about to run");
-    		mServe.setList(songList);
-    		
+    
+    protected void onStart(){ //This makes sure the MusicService is started when the main activity starts
+    	super.onStart();
+    	if(playIntent == null){
+    		playIntent = new Intent(this, MusicService.class);
+    		bindService(playIntent, musicConnection, Context.BIND_AUTO_CREATE);
+    		startService(playIntent);
     	}
-    	
     }
-
+    
     public void songPicked(View view){
+    	String curSon;
     	System.out.println(view.getTag().toString());
-    	mServe.setSong(Integer.parseInt(view.getTag().toString()));
-    	mServe.playSong(); 
+    	//current.setText(Integer.parseInt(view.getTag().getTitle()));
+    	musicSrv.setSong(Integer.parseInt(view.getTag().toString()));
+    	curSon = musicSrv.playSong();
+    	current.setText(curSon); //sets the current song playing
     }
     
     @Override
@@ -129,27 +105,45 @@ public class MainActivity extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-
+    
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
         case R.id.action_end:
-        	stopService(pIntent); //this stops a service instance
-        	mServe = null;
+        	stopService(playIntent); //this stops a service instance
+        	musicSrv = null;
         	System.exit(0); //this ends the app
         	break;
         }
        
-    	/*int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }*/
         return super.onOptionsItemSelected(item);
     }
-
+    
+    public void getSongList(){ //this method will compile the song list
+    	ContentResolver musicResolver = getContentResolver(); //this creates a content resolver instance
+    	Uri musicUri = android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI; //this creates a URI that will retrieve song info
+    	Cursor musicCursor = musicResolver.query(musicUri, null, null, null, null); //this creates the cursor to sift through the device storage
+    	
+    	if(musicCursor != null && musicCursor.moveToFirst()){
+    		int titleColumn = musicCursor.getColumnIndex(android.provider.MediaStore.Audio.Media.TITLE); //retrieving the song title
+    		int idColumn = musicCursor.getColumnIndex(android.provider.MediaStore.Audio.Media._ID); //retrieving the song id
+    		int artistColumn = musicCursor.getColumnIndex(android.provider.MediaStore.Audio.Media.ARTIST); //retrieving the artist
+    		
+    		do {
+				long thisId = musicCursor.getLong(idColumn);
+				String thisTitle = musicCursor.getString(titleColumn);
+				String thisArtist = musicCursor.getString(artistColumn);
+				songList.add(new Song(thisId, thisTitle, thisArtist));
+			} 
+			while (musicCursor.moveToNext());
+    		
+    	}
+    	
+    }
+    
     protected void onDestroy(){
-    	stopService(pIntent);
-    	mServe = null;
+    	stopService(playIntent);
+    	musicSrv = null;
     	super.onDestroy();
     }
 }
