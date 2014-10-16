@@ -1,0 +1,1 @@
+INDEX VERSION 1.127+C:\Users\austi_000\Documents\Software Programming\Tap Twist Tunes\T4\TapTwistTunes\.metadata\.plugins\org.eclipse.jdt.core
