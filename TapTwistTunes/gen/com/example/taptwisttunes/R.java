@@ -1149,8 +1149,6 @@ containing a value of this type.
         public static final int up=0x7f050021;
         public static final int useLogo=0x7f050003;
         public static final int withText=0x7f05000c;
-		public static int button1;
-		public static int display;
     }
     public static final class integer {
         /**  The maximum number of action buttons that should be permitted within

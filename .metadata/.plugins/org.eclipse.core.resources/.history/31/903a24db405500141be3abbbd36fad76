@@ -40,7 +40,7 @@ public class PitchShift extends ActionBarActivity implements SensorEventListener
 	    senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 	    senSensorManager.registerListener(this, senAccelerometer , SensorManager.SENSOR_DELAY_NORMAL);
 	
-	    hold = (Button) findViewById(R.id.sButton); //changed your button id to select button for time being
+	    hold = (Button) findViewById(R.id.button1);
 	    hold.setOnTouchListener(new OnTouchListener() {
 	        @Override
 			public boolean onTouch(View v, MotionEvent event) {
@@ -127,7 +127,7 @@ public class PitchShift extends ActionBarActivity implements SensorEventListener
 	
 	private void incrementNumber(){
 		
-		TextView display = (TextView) findViewById(R.id.cPlaying); //changed your textview over to the currently playing for time being
+		TextView display = (TextView) findViewById(R.id.display);
 	
 		String curText = (String) display.getText();
 	
