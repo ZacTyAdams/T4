@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">example</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="your_total_is_0">Your total is 0</string>
+    <string name="add_one">Add one</string>
+    <string name="sub_one">Subtract one</string>
+    <string name="tone_modulation_Title">Tone Modulator</string>
+    <string name="startTone">Start</string>
+    <string name="stopTone">Stop</string>
+    <string name="progress">50</string>
+    <string name="progressIdentifier">Tone change</string>
+    <string name="accelerometer">Accelerometer</string>
+    <string name="gravitronTitle">Gyroscope</string><string name="Xaccel">X value =</string>
+    <string name="Yaccel">Y value =</string>
+    <string name="Zaccel">Z value =</string>
+    <string name="Xgrav">X value =</string>
+    <string name="Ygrav">Y value = </string>
+    <string name="Zgrav">Z value =</string>
+    
+    <string name="actionButton">Action!!</string>
+    <string name="gStart">Start gravitron</string>
+
+</resources>

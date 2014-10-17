@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <TextView
+        android:id="@+id/accelTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/accelerometer"
+        android:textSize="25sp" />
+    
+    <TextView 
+        android:layout_width="100sp"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:id="@+id/Xaccel"
+        android:text="@string/Xaccel" />
+
+    <TextView 
+        android:layout_width="100sp"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:id="@+id/Yaccel"
+        android:text="@string/Yaccel" />
+    
+    <TextView 
+        android:layout_width="100sp"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:id="@+id/Zaccel"
+        android:text="@string/Zaccel" />
+    
+    <TextView
+        android:layout_marginTop="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:id="@+id/Gravitron" 
+        android:text="@string/gravitronTitle" />
+    
+    <TextView 
+        android:layout_width="100sp"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:id="@+id/Xgrav"
+        android:text="@string/Xgrav" />
+
+    <TextView 
+        android:layout_width="100sp"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:id="@+id/Ygrav"
+        android:text="@string/Ygrav" />
+    
+    <TextView 
+        android:layout_width="100sp"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:id="@+id/Zgrav"
+        android:text="@string/Zgrav" />
+    
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:id="@+id/bAction"
+        android:text="@string/actionButton"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp" />
+    
+</LinearLayout>
