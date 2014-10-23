@@ -33,6 +33,7 @@ public class MainActivity extends ActionBarActivity {
 	private MusicService musicSrv;
 	private Intent playIntent;
 	private boolean musicBound = false;
+	static final int REQUEST_AUDIO_MP3 = 1;
 	
 	Button select; //Declaring the selection button
 	TextView current; //Declaring the text view for the current playing song
@@ -57,13 +58,23 @@ public class MainActivity extends ActionBarActivity {
         SongAdapter songAdt = new SongAdapter(this, songList);
 		songView.setAdapter(songAdt);
         
-        select.setOnClickListener(new View.OnClickListener() { //This function will eventually open up a file browser to select a audio file
-			
+        select.setOnClickListener(new View.OnClickListener() { //This function opens up a file browser to select an audio file
+		
 			@Override
 			public void onClick(View v) {
-				
+				Intent browseIntent = new Intent();
+			    	browseIntent.setType("audio/mp3");
+				browseIntent.setAction(Intent.ACTION_GET_CONTENT);
+				startActivityForResult(Intent.createChooser(browseIntent, "Open audio file"), REQUEST_AUDIO_MP3);
 			}
-		});        
+	});  
+    }
+    
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    	if (requestCode == REQUEST_AUDIO_MP3 && resultCode == RESULT_OK) {
+    		Uri audioFileUri = data.getData();
+    		current.setText(audioFileUri.getLastPathSegment()); //display song name 
+    	}
     }
     
     private ServiceConnection musicConnection = new ServiceConnection(){
