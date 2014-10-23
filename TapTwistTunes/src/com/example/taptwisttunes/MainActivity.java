@@ -32,7 +32,7 @@ public class MainActivity extends ActionBarActivity {
 	
 	private MusicService musicSrv;
 	private Intent playIntent;
-	private boolean musicBound = false;
+	private boolean musicBound = false; // not sure where this is needed or even used -z
 	static final int REQUEST_AUDIO_MP3 = 1;
 	
 	Button select; //Declaring the selection button
@@ -73,7 +73,12 @@ public class MainActivity extends ActionBarActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     	if (requestCode == REQUEST_AUDIO_MP3 && resultCode == RESULT_OK) {
     		Uri audioFileUri = data.getData();
+    		String currentSong; //just trying something
     		current.setText(audioFileUri.getLastPathSegment()); //display song name 
+        	//current.setText(Integer.parseInt(view.getTag().getTitle()));
+        	musicSrv.setSong(audioFileUri.getPort());
+        	currentSong = audioFileUri.getLastPathSegment(); 
+        	currentSong = musicSrv.playSong();
     	}
     }
     
