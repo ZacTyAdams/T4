@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="android.widget.Button"/>
 <fullyQualifiedTypeName name="android.widget.TextView"/>
-<fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="com.example.taptwisttunes.R.layout"/>
 <fullyQualifiedTypeName name="com.example.taptwisttunes.MusicService.MusicBinder"/>
 <fullyQualifiedTypeName name="android.provider.MediaStore"/>
 <fullyQualifiedTypeName name="android.provider.MediaStore.Audio"/>
 <fullyQualifiedTypeName name="android.provider.MediaStore.Audio.Media"/>
-<fullyQualifiedTypeName name="com.example.taptwisttunes.R.id"/>
 <fullyQualifiedTypeName name="com.example.taptwisttunes.MusicService"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="android.view.View"/>
+<fullyQualifiedTypeName name="android.widget.Button"/>
+<fullyQualifiedTypeName name="android.content.Intent"/>
+<fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
+<fullyQualifiedTypeName name="com.example.taptwisttunes.R.id"/>
 </qualifiedTypeNameHistroy>
