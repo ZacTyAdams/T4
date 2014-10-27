@@ -17,6 +17,54 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
+//imports from tarsos example
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.Mixer;
+import javax.sound.sampled.TargetDataLine;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.JSpinner;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.border.TitledBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
+import be.tarsos.dsp.AudioDispatcher;
+import be.tarsos.dsp.GainProcessor;
+import be.tarsos.dsp.MultichannelToMono;
+import be.tarsos.dsp.WaveformSimilarityBasedOverlapAdd;
+import be.tarsos.dsp.WaveformSimilarityBasedOverlapAdd.Parameters;
+import be.tarsos.dsp.io.jvm.AudioDispatcherFactory;
+import be.tarsos.dsp.io.jvm.AudioPlayer;
+import be.tarsos.dsp.io.jvm.JVMAudioInputStream;
+import be.tarsos.dsp.io.jvm.WaveformWriter;
+import be.tarsos.dsp.resample.RateTransposer;
+//end tarsos imports
+
+
+
 public class MainActivity extends ActionBarActivity implements SensorEventListener{
 
 	//from tutorial
@@ -156,4 +204,135 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
 	    return true;
 	}
 	
+	//beginning of functions from example program... these functions not implemented
+	/*
+	public void PitchShiftingExample(){
+		this.setLayout(new BorderLayout());
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setTitle("Pitch shifting: change the pitch of your audio.");
+		
+		originalTempoCheckBox = new JCheckBox("Keep original tempo?", true);
+		originalTempoCheckBox.addChangeListener(parameterSettingChangedListener);
+		
+		currentFactor = 1;
+		
+		factorSlider = new JSlider(20, 250);
+		factorSlider.setValue(100);
+		factorSlider.setPaintLabels(true);
+		factorSlider.addChangeListener(parameterSettingChangedListener);
+		
+		JPanel fileChooserPanel = new JPanel(new BorderLayout());
+		fileChooserPanel.setBorder(new TitledBorder("1... Or choose your audio (wav mono)"));
+		
+		fileChooser = new JFileChooser();
+		
+		JButton chooseFileButton = new JButton("Choose a file...");
+		chooseFileButton.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				int returnVal = fileChooser.showOpenDialog(PitchShiftingExample.this);
+	            if (returnVal == JFileChooser.APPROVE_OPTION) {
+	                File file = fileChooser.getSelectedFile();
+	                startFile(file,null);
+	            } else {
+	                //canceled
+	            }
+			}			
+		});
+		fileChooserPanel.add(chooseFileButton);
+		fileChooser.setLayout(new BoxLayout(fileChooser, BoxLayout.PAGE_AXIS));
+		
+
+		JPanel inputSubPanel = new JPanel(new BorderLayout());
+		JPanel inputPanel = new InputPanel();
+		inputPanel.addPropertyChangeListener("mixer",
+				new PropertyChangeListener() {
+					@Override
+					public void propertyChange(PropertyChangeEvent arg0) {
+						startFile(null,(Mixer) arg0.getNewValue());
+					}
+				});
+		inputSubPanel.add(inputPanel,BorderLayout.NORTH);
+		inputSubPanel.add(fileChooserPanel,BorderLayout.SOUTH);
+		
+		gainSlider = new JSlider(0,200);
+		gainSlider.setValue(100);
+		gainSlider.setPaintLabels(true);
+		gainSlider.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent arg0) {
+				if (PitchShiftingExample.this.dispatcher != null) {
+					double gainValue = gainSlider.getValue() / 100.0;
+					gain.setGain(gainValue);
+				}
+			}
+		});
+		
+		
+		JPanel params = new JPanel(new BorderLayout());
+		params.setBorder(new TitledBorder("2. Set the algorithm parameters"));
+		
+		JLabel label = new JLabel("Factor 100%");
+		label.setToolTipText("The pitch shift factor in % (100 is no change, 50 is double pitch, 200 half).");
+		factorLabel = label;
+		params.add(label,BorderLayout.NORTH);
+		params.add(factorSlider,BorderLayout.CENTER);
+		
+		JPanel subPanel = new JPanel(new GridLayout(2, 2));
+			
+		centsSpinner = new JSpinner();
+		centsSpinner.addChangeListener(parameterSettingChangedListener);
+		label = new JLabel("Pitch shift in cents");
+		label.setToolTipText("Pitch shift in cents.");
+		subPanel.add(label);
+		subPanel.add(centsSpinner);
+
+		label = new JLabel("Keep original tempo");
+		label.setToolTipText("Pitch shift in cents.");
+		subPanel.add(label);
+		subPanel.add(originalTempoCheckBox);
+		
+		params.add(subPanel,BorderLayout.SOUTH);
+		
+		JPanel gainPanel = new JPanel(new BorderLayout());
+		label = new JLabel("Gain (in %)");
+		label.setToolTipText("Volume in % (100 is no change).");
+		gainPanel.add(label,BorderLayout.NORTH);
+		gainPanel.add(gainSlider,BorderLayout.CENTER);
+		gainPanel.setBorder(new TitledBorder("3. Optionally change the volume"));
+		
+		this.add(inputSubPanel,BorderLayout.NORTH);
+		this.add(params,BorderLayout.CENTER);
+		this.add(gainPanel,BorderLayout.SOUTH);
+		
+	}
+	
+	public static double centToFactor(double cents){
+		return 1 / Math.pow(Math.E,cents*Math.log(2)/1200/Math.log(Math.E)); 
+	}
+	private static double factorToCents(double factor){
+		return 1200 * Math.log(1/factor) / Math.log(2); 
+	}
+	private static void startCli(String source,String target,double cents) throws UnsupportedAudioFileException, IOException{
+		File inputFile = new File(source);
+		AudioFormat format = AudioSystem.getAudioFileFormat(inputFile).getFormat();	
+		double sampleRate = format.getSampleRate();
+		double factor = PitchShiftingExample.centToFactor(cents);
+		RateTransposer rateTransposer = new RateTransposer(factor);
+		WaveformSimilarityBasedOverlapAdd wsola = new WaveformSimilarityBasedOverlapAdd(Parameters.musicDefaults(factor, sampleRate));
+		WaveformWriter writer = new WaveformWriter(format,target);
+		AudioDispatcher dispatcher;
+		if(format.getChannels() != 1){
+			dispatcher = AudioDispatcherFactory.fromFile(inputFile,wsola.getInputBufferSize() * format.getChannels(),wsola.getOverlap() * format.getChannels());
+			dispatcher.addAudioProcessor(new MultichannelToMono(format.getChannels(),true));
+		}else{
+			dispatcher = AudioDispatcherFactory.fromFile(inputFile,wsola.getInputBufferSize(),wsola.getOverlap());
+		}
+		wsola.setDispatcher(dispatcher);
+		dispatcher.addAudioProcessor(wsola);
+		dispatcher.addAudioProcessor(rateTransposer);
+		dispatcher.addAudioProcessor(writer);
+		dispatcher.run();
+	}	
+	*/
 }
