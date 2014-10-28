@@ -7,5 +7,8 @@
     <string name="title_activity_main_menu">MainMenu</string>
     <string name="title_activity_pitch_shifting">PitchShifting</string>
     <string name="title_activity_bpmcalc">BPMCalc</string>
+    <string name="title_activity_accelerometer_test">AccelerometerTest</string>
+    <string name="title_activity_gyroscope_test">GyroscopeTest</string>
+    <string name="title_activity_recorder">Recorder</string>
 
 </resources>

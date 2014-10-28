@@ -38,12 +38,32 @@
         android:onClick="navigateB" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/bAccelerometerTest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/bBpmCalc"
         android:layout_below="@+id/bBpmCalc"
         android:layout_marginTop="18dp"
-        android:text="Button" />
+        android:text="Accelerometer Test"
+        android:onClick="navigateA" />
+
+    <Button
+        android:id="@+id/bGyroscopeTest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bAccelerometerTest"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:text="Gyroscope Test" 
+        android:onClick="navigateG"/>
+
+    <Button
+        android:id="@+id/bMicrophone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bGyroscopeTest"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="Microphone" />
     
 </RelativeLayout>    

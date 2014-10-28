@@ -38,6 +38,18 @@
             android:name=".BPMCalc"
             android:label="@string/title_activity_bpmcalc" >
         </activity>
+        <activity
+            android:name=".AccelerometerTest"
+            android:label="@string/title_activity_accelerometer_test" >
+        </activity>
+        <activity
+            android:name=".GyroscopeTest"
+            android:label="@string/title_activity_gyroscope_test" >
+        </activity>
+        <activity
+            android:name=".Recorder"
+            android:label="@string/title_activity_recorder" >
+        </activity>
     </application>
 
 </manifest>
