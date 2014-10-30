@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.TextView;
-import android.app.Activity;
 import android.content.Context;
 
 import android.hardware.Sensor;
@@ -112,12 +111,14 @@ public class AccelerometerTest extends ActionBarActivity implements SensorEventL
 	}
 	
 	//from tutorial
+	@Override
 	protected void onPause() {
 	    super.onPause();
 	    senSensorManager.unregisterListener(this);
 	}
 	
 	//from tutorial
+	@Override
 	protected void onResume() {
 	    super.onResume();
 	    senSensorManager.registerListener(this, senAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
