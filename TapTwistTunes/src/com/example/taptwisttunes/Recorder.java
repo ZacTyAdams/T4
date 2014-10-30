@@ -16,17 +16,17 @@ import android.widget.TextView;
 
 public class Recorder extends ActionBarActivity {
 
+	Button play, record, stopRec, stopPlay;
+	TextView display;
+	MediaRecorder mRecorder;
+	MediaPlayer mPlayer;
+	String mediaFile = null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_recorder);
 		//initialize();
-		
-		Button play, record, stopRec, stopPlay;
-		final TextView display;
-		MediaRecorder mRecorder;
-		MediaPlayer mPlayer;
-		String mediaFile = null;
 		
 		record = (Button) findViewById(R.id.bRecord);
 		stopRec = (Button) findViewById(R.id.bStopRec);
@@ -158,6 +158,21 @@ public class Recorder extends ActionBarActivity {
 		stopRec.setEnabled(false);
 	}
 
+	
+	//call to stop playing audio
+	public void stopPlayFunction(View v) {
+		// TODO Auto-generated method stub
+		if (mPlayer!=null) {
+			mPlayer.release();
+			mPlayer = null;
+			//enable the playButton and record and disable the rest
+			stopPlay.setEnabled(false);
+			play.setEnabled(true);
+			record.setEnabled(true);
+			stopRec.setEnabled(false);
+		}
+	}
+		
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

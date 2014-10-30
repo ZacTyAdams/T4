@@ -64,6 +64,7 @@
         android:layout_below="@+id/bGyroscopeTest"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:text="Microphone" />
+        android:text="Microphone" 
+        android:onClick="navigateR"/>
     
 </RelativeLayout>    
