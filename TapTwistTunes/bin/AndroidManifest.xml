@@ -10,15 +10,16 @@
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/iconn"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainMenu"
-            android:label="@string/title_activity_main_menu" >
+            android:name=".TapTwistTunes"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,6 +38,18 @@
         <activity
             android:name=".BPMCalc"
             android:label="@string/title_activity_bpmcalc" >
+        </activity>
+        <activity
+            android:name=".AccelerometerTest"
+            android:label="@string/title_activity_accelerometer_test" >
+        </activity>
+        <activity
+            android:name=".GyroscopeTest"
+            android:label="@string/title_activity_gyroscope_test" >
+        </activity>
+        <activity
+            android:name=".Recorder"
+            android:label="@string/title_activity_recorder" >
         </activity>
     </application>
 

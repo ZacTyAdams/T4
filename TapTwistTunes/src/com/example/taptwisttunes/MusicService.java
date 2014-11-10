@@ -27,6 +27,7 @@ MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener, MediaPlayer.OnCompl
 	
 	private final IBinder musicBind = new MusicBinder();
 
+	@Override
 	public void onCreate(){ // setup to creating the service when started
 		super.onCreate(); // Create the service
 		songPosn=0; // Setting the song position counter
@@ -61,6 +62,7 @@ MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener, MediaPlayer.OnCompl
 		return musicBind;
 	}
 	
+	@Override
 	public boolean onUnbind(Intent intent){ //This unbinds and releases resources when the app is closed
 		player.stop();
 		player.release();

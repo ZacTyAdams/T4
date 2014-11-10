@@ -17,9 +17,10 @@ import android.widget.ListView;
 import android.net.Uri;
 import android.content.ContentResolver;
 import android.database.Cursor;
-import android.app.Activity;
-
 import android.os.IBinder;
+import android.provider.BaseColumns;
+import android.provider.MediaStore.Audio.AudioColumns;
+import android.provider.MediaStore.MediaColumns;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -50,6 +51,7 @@ public class AudioPlayer extends ActionBarActivity {
         getSongList();
         
         Collections.sort(songList, new Comparator<Song>(){
+			@Override
 			public int compare(Song a, Song b){
 				return a.getTitle().compareTo(b.getTitle());
 			}
@@ -70,7 +72,8 @@ public class AudioPlayer extends ActionBarActivity {
 	}); 
     }
     
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    @Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     	if (requestCode == REQUEST_AUDIO_MP3 && resultCode == RESULT_OK) {
     		Uri audioFileUri = data.getData();
     		String currentSong; //just trying something
@@ -97,7 +100,8 @@ public class AudioPlayer extends ActionBarActivity {
     };
     
     
-    protected void onStart(){ //This makes sure the MusicService is started when the main activity starts
+    @Override
+	protected void onStart(){ //This makes sure the MusicService is started when the main activity starts
     	super.onStart();
     	if(playIntent == null){
     		playIntent = new Intent(this, MusicService.class);
@@ -141,9 +145,9 @@ public class AudioPlayer extends ActionBarActivity {
     	Cursor musicCursor = musicResolver.query(musicUri, null, null, null, null); //this creates the cursor to sift through the device storage
     	
     	if(musicCursor != null && musicCursor.moveToFirst()){
-    		int titleColumn = musicCursor.getColumnIndex(android.provider.MediaStore.Audio.Media.TITLE); //retrieving the song title
-    		int idColumn = musicCursor.getColumnIndex(android.provider.MediaStore.Audio.Media._ID); //retrieving the song id
-    		int artistColumn = musicCursor.getColumnIndex(android.provider.MediaStore.Audio.Media.ARTIST); //retrieving the artist
+    		int titleColumn = musicCursor.getColumnIndex(MediaColumns.TITLE); //retrieving the song title
+    		int idColumn = musicCursor.getColumnIndex(BaseColumns._ID); //retrieving the song id
+    		int artistColumn = musicCursor.getColumnIndex(AudioColumns.ARTIST); //retrieving the artist
     		
     		do {
 				long thisId = musicCursor.getLong(idColumn);
@@ -159,7 +163,8 @@ public class AudioPlayer extends ActionBarActivity {
     
 
     
-    protected void onDestroy(){
+    @Override
+	protected void onDestroy(){
     	stopService(playIntent);
     	musicSrv = null;
     	super.onDestroy();
