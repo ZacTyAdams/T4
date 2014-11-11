@@ -51,6 +51,10 @@
             android:name=".Recorder"
             android:label="@string/title_activity_recorder" >
         </activity>
+        <activity
+            android:name=".TarsosMediaPlayer"
+            android:label="@string/title_activity_tarsos_media_player" >
+        </activity>
     </application>
 
 </manifest>

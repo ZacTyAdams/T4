@@ -12,13 +12,13 @@
         android:id="@+id/btStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/seekBar1"
+        android:layout_alignLeft="@+id/TempoSlider"
         android:layout_alignParentTop="true"
         android:layout_marginTop="15dp"
         android:text="Start" />
 
     <SeekBar
-        android:id="@+id/seekBar1"
+        android:id="@+id/TempoSlider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btStop"
@@ -39,9 +39,9 @@
         android:id="@+id/seekBarProgressDelta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/seekBar1"
-        android:layout_alignRight="@+id/seekBar1"
-        android:layout_below="@+id/seekBar1"
+        android:layout_alignLeft="@+id/TempoSlider"
+        android:layout_alignRight="@+id/TempoSlider"
+        android:layout_below="@+id/TempoSlider"
         android:layout_marginTop="42dp"
         android:text="SeekbarProgress" />
 
@@ -58,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/btStop"
-        android:layout_alignRight="@+id/seekBar1"
+        android:layout_alignRight="@+id/TempoSlider"
         android:text="Listen" />
 
 </RelativeLayout>
