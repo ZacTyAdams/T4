@@ -10,5 +10,6 @@
     <string name="title_activity_accelerometer_test">AccelerometerTest</string>
     <string name="title_activity_gyroscope_test">GyroscopeTest</string>
     <string name="title_activity_recorder">Recorder</string>
+    <string name="title_activity_tarsos_media_player">TarsosMediaPlayer</string>
 
 </resources>

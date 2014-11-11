@@ -23,9 +23,9 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/feature"
         android:layout_below="@+id/feature"
-        android:layout_marginTop="24dp"
-        android:text="Music Player" 
-        android:onClick="navigateM"/>
+        android:layout_marginTop="14dp"
+        android:onClick="navigateM"
+        android:text="Music Player" />
 
     <Button
         android:id="@+id/bBpmCalc"
@@ -33,9 +33,9 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/bMusicPlayer"
         android:layout_below="@+id/bMusicPlayer"
-        android:layout_marginTop="20dp"
-        android:text="BPM Calculator"
-        android:onClick="navigateB" />
+        android:layout_marginTop="16dp"
+        android:onClick="navigateB"
+        android:text="BPM Calculator" />
 
     <Button
         android:id="@+id/bAccelerometerTest"
@@ -43,28 +43,38 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/bBpmCalc"
         android:layout_below="@+id/bBpmCalc"
-        android:layout_marginTop="18dp"
-        android:text="Accelerometer Test"
-        android:onClick="navigateA" />
+        android:layout_marginTop="16dp"
+        android:onClick="navigateA"
+        android:text="Accelerometer Test" />
 
     <Button
         android:id="@+id/bGyroscopeTest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/bAccelerometerTest"
         android:layout_below="@+id/bAccelerometerTest"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp"
-        android:text="Gyroscope Test" 
-        android:onClick="navigateG"/>
+        android:layout_marginTop="14dp"
+        android:onClick="navigateG"
+        android:text="Gyroscope Test" />
 
     <Button
         android:id="@+id/bMicrophone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/bGyroscopeTest"
         android:layout_below="@+id/bGyroscopeTest"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:text="Microphone" 
-        android:onClick="navigateR"/>
+        android:layout_marginTop="14dp"
+        android:onClick="navigateR"
+        android:text="Microphone" />
+
+    <Button
+        android:id="@+id/StartSongt"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/bMicrophone"
+        android:layout_below="@+id/bMicrophone"
+        android:onClick="navigateT"
+        android:text="TMusicP" />
     
 </RelativeLayout>    

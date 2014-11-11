@@ -35,7 +35,7 @@ public class GyroscopeTest extends ActionBarActivity implements OnTouchListener,
 		Play = (Button) findViewById(R.id.btStart);
 		Stop = (Button) findViewById(R.id.btStop);
 		actionButton = (Button) findViewById(R.id.btListen);
-		seeker = (SeekBar) findViewById(R.id.seekBar1);
+		seeker = (SeekBar) findViewById(R.id.TempoSlider);
 		ourToneToMod = MediaPlayer.create(this, R.raw.spashsound);
 		sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 	
