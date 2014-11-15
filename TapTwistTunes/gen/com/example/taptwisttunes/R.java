@@ -1082,6 +1082,7 @@ containing a value of this type.
         public static final int iconn=0x7f020059;
     }
     public static final class id {
+        public static final int DText=0x7f060057;
         public static final int StartSongt=0x7f06004f;
         public static final int StopSongT=0x7f060056;
         public static final int TempoSlider=0x7f060042;
@@ -1097,11 +1098,11 @@ containing a value of this type.
         public static final int action_bar_subtitle=0x7f060023;
         public static final int action_bar_title=0x7f060022;
         public static final int action_context_bar=0x7f06001d;
-        public static final int action_end=0x7f06005a;
+        public static final int action_end=0x7f06005d;
         public static final int action_menu_divider=0x7f060016;
         public static final int action_menu_presenter=0x7f060017;
         public static final int action_mode_close_button=0x7f060024;
-        public static final int action_settings=0x7f060059;
+        public static final int action_settings=0x7f06005c;
         public static final int activity_chooser_view_content=0x7f060025;
         public static final int always=0x7f06000b;
         public static final int bAccelerometerTest=0x7f06004c;
@@ -1119,6 +1120,8 @@ containing a value of this type.
         public static final int btListen=0x7f06003c;
         public static final int btStart=0x7f060041;
         public static final int btStop=0x7f060043;
+        public static final int btpPause=0x7f060059;
+        public static final int btpPlay=0x7f060058;
         public static final int cPlaying=0x7f060047;
         public static final int checkbox=0x7f06002d;
         public static final int collapseActionView=0x7f06000d;
@@ -1161,9 +1164,9 @@ containing a value of this type.
         public static final int showCustom=0x7f060007;
         public static final int showHome=0x7f060004;
         public static final int showTitle=0x7f060006;
-        public static final int song_artist=0x7f060058;
+        public static final int song_artist=0x7f06005b;
         public static final int song_list=0x7f060048;
-        public static final int song_title=0x7f060057;
+        public static final int song_title=0x7f06005a;
         public static final int split_action_bar=0x7f06001e;
         public static final int submit_area=0x7f060039;
         public static final int tabMode=0x7f060002;
@@ -1232,8 +1235,9 @@ containing a value of this type.
         public static final int activity_pitch_change=0x7f03001d;
         public static final int activity_recorder=0x7f03001e;
         public static final int activity_tarsos_media_player=0x7f03001f;
-        public static final int song=0x7f030020;
-        public static final int support_simple_spinner_dropdown_item=0x7f030021;
+        public static final int activity_tarsos_pitch_test=0x7f030020;
+        public static final int song=0x7f030021;
+        public static final int support_simple_spinner_dropdown_item=0x7f030022;
     }
     public static final class menu {
         public static final int accelerometer_test=0x7f0d0000;
@@ -1243,6 +1247,7 @@ containing a value of this type.
         public static final int main_menu=0x7f0d0004;
         public static final int recorder=0x7f0d0005;
         public static final int tarsos_media_player=0x7f0d0006;
+        public static final int tarsos_pitch_test=0x7f0d0007;
     }
     public static final class raw {
         public static final int loudpipes=0x7f050000;
@@ -1299,6 +1304,7 @@ containing a value of this type.
         public static final int title_activity_pitch_shifting=0x7f0b0011;
         public static final int title_activity_recorder=0x7f0b0015;
         public static final int title_activity_tarsos_media_player=0x7f0b0016;
+        public static final int title_activity_tarsos_pitch_test=0x7f0b0017;
     }
     public static final class style {
         /** 

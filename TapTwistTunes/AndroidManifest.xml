@@ -55,6 +55,10 @@
             android:name=".TarsosMediaPlayer"
             android:label="@string/title_activity_tarsos_media_player" >
         </activity>
+        <activity
+            android:name=".TarsosPitchTest"
+            android:label="@string/title_activity_tarsos_pitch_test" >
+        </activity>
     </application>
 
 </manifest>

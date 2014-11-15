@@ -24,7 +24,8 @@
 <fullyQualifiedTypeName name="android.media.MediaPlayer"/>
 <fullyQualifiedTypeName name="android.widget.Button"/>
 <fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
-<fullyQualifiedTypeName name="android.media.AudioFormat"/>
 <fullyQualifiedTypeName name="com.example.taptwisttunes.R.id"/>
 <fullyQualifiedTypeName name="com.example.taptwisttunes.R.raw"/>
+<fullyQualifiedTypeName name="android.media.AudioFormat"/>
+<fullyQualifiedTypeName name="java.nio.ByteOrder"/>
 </qualifiedTypeNameHistroy>
