@@ -1079,7 +1079,8 @@ containing a value of this type.
         public static final int abc_textfield_searchview_right_holo_light=0x7f020056;
         public static final int end=0x7f020057;
         public static final int ic_launcher=0x7f020058;
-        public static final int iconn=0x7f020059;
+        public static final int icon2=0x7f020059;
+        public static final int iconn=0x7f02005a;
     }
     public static final class id {
         public static final int DText=0x7f060057;
@@ -1098,11 +1099,11 @@ containing a value of this type.
         public static final int action_bar_subtitle=0x7f060023;
         public static final int action_bar_title=0x7f060022;
         public static final int action_context_bar=0x7f06001d;
-        public static final int action_end=0x7f06005d;
+        public static final int action_end=0x7f06005f;
         public static final int action_menu_divider=0x7f060016;
         public static final int action_menu_presenter=0x7f060017;
         public static final int action_mode_close_button=0x7f060024;
-        public static final int action_settings=0x7f06005c;
+        public static final int action_settings=0x7f06005e;
         public static final int activity_chooser_view_content=0x7f060025;
         public static final int always=0x7f06000b;
         public static final int bAccelerometerTest=0x7f06004c;
@@ -1110,6 +1111,7 @@ containing a value of this type.
         public static final int bButton=0x7f060040;
         public static final int bCalc=0x7f06003f;
         public static final int bGyroscopeTest=0x7f06004d;
+        public static final int bImport=0x7f06005b;
         public static final int bMicrophone=0x7f06004e;
         public static final int bMusicPlayer=0x7f06004a;
         public static final int bPlay=0x7f060052;
@@ -1139,6 +1141,7 @@ containing a value of this type.
         public static final int icon=0x7f06002a;
         public static final int ifRoom=0x7f06000a;
         public static final int image=0x7f060027;
+        public static final int imageView1=0x7f06005a;
         public static final int listMode=0x7f060001;
         public static final int list_item=0x7f060029;
         public static final int middle=0x7f060012;
@@ -1164,9 +1167,9 @@ containing a value of this type.
         public static final int showCustom=0x7f060007;
         public static final int showHome=0x7f060004;
         public static final int showTitle=0x7f060006;
-        public static final int song_artist=0x7f06005b;
+        public static final int song_artist=0x7f06005d;
         public static final int song_list=0x7f060048;
-        public static final int song_title=0x7f06005a;
+        public static final int song_title=0x7f06005c;
         public static final int split_action_bar=0x7f06001e;
         public static final int submit_area=0x7f060039;
         public static final int tabMode=0x7f060002;
@@ -1236,8 +1239,9 @@ containing a value of this type.
         public static final int activity_recorder=0x7f03001e;
         public static final int activity_tarsos_media_player=0x7f03001f;
         public static final int activity_tarsos_pitch_test=0x7f030020;
-        public static final int song=0x7f030021;
-        public static final int support_simple_spinner_dropdown_item=0x7f030022;
+        public static final int intro=0x7f030021;
+        public static final int song=0x7f030022;
+        public static final int support_simple_spinner_dropdown_item=0x7f030023;
     }
     public static final class menu {
         public static final int accelerometer_test=0x7f0d0000;
@@ -1250,8 +1254,11 @@ containing a value of this type.
         public static final int tarsos_pitch_test=0x7f0d0007;
     }
     public static final class raw {
-        public static final int loudpipes=0x7f050000;
-        public static final int spashsound=0x7f050001;
+        public static final int icon2=0x7f050000;
+        public static final int icon2_r=0x7f050001;
+        public static final int icon3_r=0x7f050002;
+        public static final int loudpipes=0x7f050003;
+        public static final int spashsound=0x7f050004;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -1300,6 +1307,7 @@ containing a value of this type.
         public static final int title_activity_accelerometer_test=0x7f0b0013;
         public static final int title_activity_bpmcalc=0x7f0b0012;
         public static final int title_activity_gyroscope_test=0x7f0b0014;
+        public static final int title_activity_import=0x7f0b0018;
         public static final int title_activity_main_menu=0x7f0b0010;
         public static final int title_activity_pitch_shifting=0x7f0b0011;
         public static final int title_activity_recorder=0x7f0b0015;
