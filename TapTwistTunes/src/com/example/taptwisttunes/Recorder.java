@@ -11,12 +11,13 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
 public class Recorder extends ActionBarActivity {
 
-	Button play, record, stopRec, stopPlay;
+	Button play, record, stop;
 	TextView display;
 	MediaRecorder mRecorder;
 	MediaPlayer mPlayer;
@@ -26,16 +27,15 @@ public class Recorder extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_recorder);
-		//initialize();
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		
+		//initialize all the buttons
 		record = (Button) findViewById(R.id.bRecord);
-		stopRec = (Button) findViewById(R.id.bStopRec);
+		stop = (Button) findViewById(R.id.bStop);
 		play = (Button) findViewById(R.id.bPlay);
-		stopPlay = (Button) findViewById(R.id.bStopPlay);
 		display = (TextView) findViewById(R.id.actionText);
 		
-		
-		initialize(); //initialize all the buttons (may not be needed)
 		
 		//create TapTwistTunes folder in SD card and store recordings in it
 		String newFolder = "/TapTwistTunes";
@@ -45,27 +45,26 @@ public class Recorder extends ActionBarActivity {
 		mediaFile = Environment.getExternalStorageDirectory().toString() + "/" + newFolder + "/myRecordings.mp3";
 		
 		//disable buttons that can't use until we record
-		stopRec.setEnabled(false);
+		stop.setEnabled(false);
 		play.setEnabled(false);
-		stopPlay.setEnabled(false);
 		//start recording when I click record button
 		record.setOnClickListener(new View.OnClickListener() {
 					
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				display.setText("Recording Audio");
+				display.setText("RECORDING AUDIO");
 				record(v);
 			}
 		});
 		
 		//stop recording when I click the first stop button
-		stopRec.setOnClickListener(new View.OnClickListener() {
+		stop.setOnClickListener(new View.OnClickListener() {
 					
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				display.setText("Audio Recorded");
+				display.setText("AUDIO RECORDED");
 				stopRec(v);
 			}
 		});
@@ -76,30 +75,10 @@ public class Recorder extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				display.setText("Playing the recording");
+				display.setText("PLAYING THE RECORDING");
 				play(v);
 			}
 		});
-				
-		//stop playing recorded audio when I click the second stop button 
-		stopPlay.setOnClickListener(new View.OnClickListener() {
-					
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				display.setText("Stop playing the recording");
-				stopPlayFunction(v);
-			}
-		});	
-	}
-	
-	private void initialize() {
-		// TODO Auto-generated method stub
-		record = (Button) findViewById(R.id.bRecord);
-		stopRec = (Button) findViewById(R.id.bStopRec);
-		play = (Button) findViewById(R.id.bPlay);
-		stopPlay = (Button) findViewById(R.id.bStopPlay);
-		display = (TextView) findViewById(R.id.actionText);
 	}
 	
 	//call to record audio
@@ -119,57 +98,54 @@ public class Recorder extends ActionBarActivity {
 		}
 		mRecorder.start();
 		//enable the stopRec button and disable the rest
-		stopRec.setEnabled(true);
+		stop.setEnabled(true);
 		record.setEnabled(false);
 		play.setEnabled(false);	
 	}
 	
+	//call to play recorded audio
+		public void play(View v) {
+			// TODO Auto-generated method stub
+			mPlayer = new MediaPlayer();
+			try {
+				mPlayer.setDataSource(mediaFile);
+				mPlayer.prepare();
+				mPlayer.start();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			//enable the stopPlay button and disable the rest
+			if (mPlayer == null) {
+				play.setEnabled(true);
+				record.setEnabled(true);
+			}
+			play.setEnabled(false);
+			stop.setEnabled(true);
+			record.setEnabled(false);
+			//stopRec.setEnabled(false);
+		}
+
+	
 	//call to stop recording audio
 	public void stopRec(View v) {
 			// TODO Auto-generated method stub
-			mRecorder.stop();
+		if (mRecorder != null) {
+		    mRecorder.stop();
 			mRecorder.release();
 			mRecorder = null;
 			//enable play and record button and disable the rest
-			stopRec.setEnabled(false);
+			stop.setEnabled(false);
 			record.setEnabled(true);
 			play.setEnabled(true);
-			stopPlay.setEnabled(false);
 	}
-
-	//call to play recorded audio
-	public void play(View v) {
-		// TODO Auto-generated method stub
-		mPlayer = new MediaPlayer();
-		try {
-			mPlayer.setDataSource(mediaFile);
-			mPlayer.prepare();
-			mPlayer.start();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		//enable the stopPlay button and disable the rest
-		if (mPlayer == null) {
-			play.setEnabled(true);
-			record.setEnabled(true);
-		}
-		play.setEnabled(false);
-		stopPlay.setEnabled(true);
-		stopRec.setEnabled(false);
-	}
-
-	
+		else if (mPlayer != null) { 
 	//call to stop playing audio
-	public void stopPlayFunction(View v) {
-		// TODO Auto-generated method stub
-		if (mPlayer!=null) {
 			mPlayer.release();
 			mPlayer = null;
 			//enable the playButton and record and disable the rest
-			stopPlay.setEnabled(false);
+			stop.setEnabled(false);
 			play.setEnabled(true);
 			record.setEnabled(true);
-			stopRec.setEnabled(false);
 		}
 	}
 		
