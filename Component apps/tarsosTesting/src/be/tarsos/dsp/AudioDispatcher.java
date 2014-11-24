@@ -217,7 +217,7 @@ public class AudioDispatcher implements Runnable {
 	 */
 	public void setStepSizeAndOverlap(final int audioBufferSize, final int bufferOverlap){
 		audioFloatBuffer = new float[audioBufferSize];
-		floatOverlap = bufferOverlap;
+		floatOverlap = bufferOverlap; //CHANGING FROM BUFFER OVERLAP
 		floatStepSize = audioFloatBuffer.length - floatOverlap;
 
 		final TarsosDSPAudioFormat format = audioInputStream.getFormat();

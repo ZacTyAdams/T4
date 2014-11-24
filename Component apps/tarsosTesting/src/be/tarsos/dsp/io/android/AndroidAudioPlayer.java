@@ -26,13 +26,13 @@ public class AndroidAudioPlayer implements AudioProcessor {
 		}
 	
 @Override
-public boolean process(AudioEvent audioEvent){
-	//short[] shorts = new short[audioEvent.getBufferSize() / 2];
-	//ByteBuffer.wrap(audioEvent.getByteBuffer()).order(ByteOrder.LITTLE_ENDIAN).asShortBuffer().get(shorts);
-	//audioTrack.write(shorts, 0, shorts.length);
-	byte[] bytes = new byte[audioEvent.getBufferSize()];
-	ByteBuffer.wrap(audioEvent.getByteBuffer()).order(ByteOrder.LITTLE_ENDIAN).get(bytes);
-	audioTrack.write(bytes, 0, audioEvent.getBufferSize());
+public boolean process(AudioEvent audioEvent){// CHanged over from byte[format]
+	short[] shorts = new short[audioEvent.getBufferSize() / 2];
+	ByteBuffer.wrap(audioEvent.getByteBuffer()).order(ByteOrder.LITTLE_ENDIAN).asShortBuffer().get(shorts);
+	audioTrack.write(shorts, 0, shorts.length);
+	//byte[] bytes = new byte[audioEvent.getBufferSize()];
+	//ByteBuffer.wrap(audioEvent.getByteBuffer()).order(ByteOrder.LITTLE_ENDIAN).get(bytes);
+	//audioTrack.write(bytes, 0, audioEvent.getBufferSize());
 	Log.d("AndroidAudioPlayer", "process audio event");
 	return true;
 }

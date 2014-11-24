@@ -55,7 +55,7 @@ public class RateTransposer implements AudioProcessor {
 	 */
 	public RateTransposer(double factor){
 		this.factor = factor;
-		r= new Resampler(false,0.1,4.0);
+		r= new Resampler(true,0.1,4.0);
 	}
 	
 	public void setFactor(double tempo){
@@ -69,7 +69,7 @@ public class RateTransposer implements AudioProcessor {
 		//Possible optimization is to instantiate it outside the loop and get a pointer to the 
 		//array here, in the process method method.
 		float[] out = new float[(int) (src.length * factor)];
-		r.process(factor, src, 0, src.length, false, out, 0, out.length);
+		r.process(factor, src, 0, src.length, true, out, 0, out.length); //changed to true
 		//The size of the output buffer changes (according to factor). 
 		audioEvent.setFloatBuffer(out);
 		return true;

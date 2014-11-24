@@ -23,11 +23,16 @@
 
 package be.tarsos.dsp.io.android;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+
+import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import be.tarsos.dsp.AudioDispatcher;
 import be.tarsos.dsp.io.TarsosDSPAudioFormat;
 import be.tarsos.dsp.io.TarsosDSPAudioInputStream;
+import be.tarsos.dsp.io.UniversalAudioInputStream;
 
 /**
  * The Factory creates {@link AudioDispatcher} objects from the
@@ -77,4 +82,11 @@ public class AudioDispatcherFactory {
 		
 		
 	}
+	
+	public static AudioDispatcher fromFile(final UniversalAudioInputStream stream, final int audioBufferSize,final int bufferOverlap)
+			throws IOException {
+		TarsosDSPAudioInputStream audioStream = stream;
+		return new AudioDispatcher(audioStream, audioBufferSize, bufferOverlap);
+	}
+	
 }

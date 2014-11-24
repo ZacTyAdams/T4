@@ -20,6 +20,7 @@ import be.tarsos.dsp.pitch.PitchDetectionResult;
 import be.tarsos.dsp.pitch.PitchProcessor;
 import be.tarsos.dsp.pitch.PitchProcessor.PitchEstimationAlgorithm;
 import be.tarsos.dsp.resample.RateTransposer;
+import be.tarsos.dsp.resample.SoundTouchRateTransposer;
 import android.app.Activity;
 import android.media.AudioFormat;
 import android.media.MediaPlayer;
@@ -48,8 +49,10 @@ public class MainActivity extends Activity implements OnClickListener {
 	private AudioDispatcher dispatcher;
 	private WaveformSimilarityBasedOverlapAdd wsola;
 	private RateTransposer rateTransposer;
+	private SoundTouchRateTransposer strateTransposer;
 	private double currentFactor;// pitch shift factor
 	private double sampleRate;
+	private double tempo;
 	private Thread t;
 	
 	@Override
@@ -80,34 +83,48 @@ public class MainActivity extends Activity implements OnClickListener {
 		setContentView(layout);
 		
 		
-		mpAudio = MediaPlayer.create(this, R.raw.dreaming_converted);
+		//mpAudio = MediaPlayer.create(this, R.raw.dreaming_converted);
 		
 		//AudioDispatcher dispatcher = AudioDispatcherFactory.fromDefaultMicrophone(22050, 1024, 0);
 		
 		
 		//beginning of new test stuff
+		
 		InputStream wavStream;
-		wavStream = new BufferedInputStream(getResources().openRawResource(R.raw.dreaming_converted16));
+		wavStream = new BufferedInputStream(getResources().openRawResource(R.raw.last_dance_mono));
+		
+		System.out.println(wavStream.toString());
+		
 		//this line is probably wrong, try with variations
-		TarsosDSPAudioFormat audioFormat = new TarsosDSPAudioFormat(22050, 16, 1, true, false);
+		TarsosDSPAudioFormat audioFormat = new TarsosDSPAudioFormat(44100, 16, 1, true, false);
+		
 		UniversalAudioInputStream audioStream = new UniversalAudioInputStream(wavStream,audioFormat);
+		//UniversalAudioInputStream audioStream = new UniversalAudioInputStream(wavStream,audioFormat);
 		
 		currentFactor = 1;
+		tempo = .5;
 		sampleRate = audioFormat.getSampleRate();
 		Log.i("****SAMPLE RATE*****", "" + sampleRate);
-		wsola = new WaveformSimilarityBasedOverlapAdd(Parameters.musicDefaults(currentFactor, sampleRate));
+		wsola = new WaveformSimilarityBasedOverlapAdd(Parameters.musicDefaults(tempo, sampleRate));
 		
-		AudioDispatcher dispatcher = new AudioDispatcher(audioStream, 1024, 513);
-		AndroidAudioPlayer player = new AndroidAudioPlayer(audioFormat, 1024);
+		System.out.println(wsola.getInputBufferSize());
+		System.out.println(wsola.getOverlap());
+		System.out.println(wsola.getOutputBufferSize());
 		
-		//wsola.setDispatcher(dispatcher);
-
-		//wsola = new WaveformSimilarityBasedOverlapAdd(Parameters.musicDefaults(currentFactor, sampleRate));
-	
+		
+		try {
+			dispatcher = AudioDispatcherFactory.fromFile(audioStream, wsola.getInputBufferSize(), (int)(wsola.getInputBufferSize()/2));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//AudioDispatcher dispatcher = new AudioDispatcher(audioStream, wsola.getInputBufferSize(), (wsola.getInputBufferSize()/2)); //trying wsola grab
+		AndroidAudioPlayer player = new AndroidAudioPlayer(audioFormat, wsola.getInputBufferSize());
+		
 		rateTransposer = new RateTransposer(currentFactor);
-		//rateTransposer.setFactor(currentFactor);
 		
-		//dispatcher.addAudioProcessor(wsola);
+		wsola.setDispatcher(dispatcher);
+		dispatcher.addAudioProcessor(wsola);
 		dispatcher.addAudioProcessor(rateTransposer);
 		dispatcher.addAudioProcessor(player);
 		
@@ -171,21 +188,29 @@ public class MainActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		if(v == bPlay){
-			//mpAudio.start();
+			tempo = tempo - .1;
+			wsola.setParameters(Parameters.musicDefaults(tempo, sampleRate));
+			dText.setText("" + tempo);
 		}
 		else if(v == bPause){
-			//mpAudio.pause();
+			tempo = tempo + .1;
+			wsola.setParameters(Parameters.musicDefaults(tempo, sampleRate));
+			dText.setText("" + tempo);
 		}
 		else if(v==incButton){
 			if(currentFactor != 0.1){
 				currentFactor = currentFactor - 0.1;
+				tempo = tempo - .06;
 			}
 			rateTransposer.setFactor(currentFactor);
+			wsola.setParameters(Parameters.musicDefaults(tempo, sampleRate));
 			dText.setText("" + currentFactor);
 		}
 		else if(v==decButton){
 			currentFactor = currentFactor + 0.1;
+			tempo = tempo + .06;
 			rateTransposer.setFactor(currentFactor);
+			wsola.setParameters(Parameters.musicDefaults(tempo, sampleRate));
 			dText.setText("" + currentFactor);
 		}
 		
