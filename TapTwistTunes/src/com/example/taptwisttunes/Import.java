@@ -34,6 +34,7 @@ public class Import extends ActionBarActivity {
 	int currentSongPosition = 0;
 	private VisualizerView mVisualizerView;
 	private static final int READ_REQUEST_CODE = 42;
+	boolean songSelected; //used to stop play from working until a song is selected
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,8 @@ public class Import extends ActionBarActivity {
 		pause = (ImageButton) findViewById(R.id.pause);
 		stop = (ImageButton) findViewById(R.id.stop);
 		song = (TextView) findViewById(R.id.songTitle);
+		
+		songSelected = false;
 		
         //this stops the music playing
 		stop.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +93,7 @@ public class Import extends ActionBarActivity {
 			
 			@Override
 			public void onClick(View v) {
+				if(songSelected) { //if no song can't press play
 				// TODO Auto-generated method stub	
 		        	if(mediaPlayer != null) {
 		        		mediaPlayer.release();
@@ -130,6 +134,7 @@ public class Import extends ActionBarActivity {
 					mediaPlayer.seekTo(currentSongPosition);
 					mVisualizerView.setEnabled(true);
 					mVisualizerView.link(mediaPlayer);
+				}
 			}
 		});
 	
@@ -198,7 +203,7 @@ public class Import extends ActionBarActivity {
 	        	// We need to link the visualizer view to the media player so that
 	            // it displays something
 	        	mVisualizerView.link(mediaPlayer);
-
+	        	songSelected = true;
 	        }
 	    }
 	}

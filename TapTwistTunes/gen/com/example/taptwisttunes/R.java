@@ -1281,12 +1281,9 @@ containing a value of this type.
         public static final int icon2_r=0x7f050004;
         public static final int icon3_r=0x7f050005;
         public static final int loudpipes=0x7f050006;
-        public static final int pause=0x7f050007;
-        public static final int play=0x7f050008;
-        public static final int slider=0x7f050009;
-        public static final int spashsound=0x7f05000a;
-        public static final int stop=0x7f05000b;
-        public static final int workaround_1min=0x7f05000c;
+        public static final int slider=0x7f050007;
+        public static final int spashsound=0x7f050008;
+        public static final int workaround_1min=0x7f050009;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
