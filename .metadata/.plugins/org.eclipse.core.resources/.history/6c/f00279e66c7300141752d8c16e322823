@@ -49,7 +49,7 @@ public class Import extends ActionBarActivity {
 		stop = (ImageButton) findViewById(R.id.stop);
 		song = (TextView) findViewById(R.id.songTitle);
 		
-        //this stops the music playing
+        //this stops the music playing 
 		stop.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -58,14 +58,19 @@ public class Import extends ActionBarActivity {
 				if (mediaPlayer!=null) {
 					mediaPlayer.release();
 					mediaPlayer = null;
-					mVisualizerView.clearRenderers();
 	        		mVisualizerView.release();
 					currentSongPosition = 0;
-				}				
+				}
+				else {
+					mVisualizerView = (VisualizerView) findViewById(R.id.visualizerView);
+					addBarGraphRenderers();
+					mVisualizerView.clearRenderers();
+					mVisualizerView.release();
+				}
+				
 			}
 		});
 		
-		//releases the media player and saves the last know location of the song
 		pause.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -83,9 +88,6 @@ public class Import extends ActionBarActivity {
 			}
 		});
 		
-		//mediaPlayer.pause() wasn't working occasionally so instead the mediaPlayer is released on 
-		//pause and reopened on play at the location it left off. It's been tested and there is no
-		//lag or issues with this way.
 		play.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -155,6 +157,10 @@ public class Import extends ActionBarActivity {
 	
 	public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
 	    if (requestCode == READ_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+	        // The document selected by the user won't be returned in the intent.
+	        // Instead, a URI to that document will be contained in the return intent
+	        // provided to this method as a parameter.
+	        // Pull that URI using resultData.getData().
 	    	browseUri = null;
 	        if (resultData != null) {
 	        	browseUri = resultData.getData();
@@ -195,10 +201,9 @@ public class Import extends ActionBarActivity {
 	            //song plays
 	            mediaPlayer.start();
 	        	mVisualizerView.setEnabled(true);
-	        	// We need to link the visualizer view to the media player so that
-	            // it displays something
 	        	mVisualizerView.link(mediaPlayer);
-
+	            // We need to link the visualizer view to the media player so that
+	            // it displays something
 	        }
 	    }
 	}
@@ -218,7 +223,6 @@ public class Import extends ActionBarActivity {
 	    return s;
 	}*/
 	
-	//This is the work around for the galaxy S4
     private void initTunnelPlayerWorkaround() {
     		// Read "tunnel.decode" system property to determine
 		    // the workaround is needed
@@ -227,7 +231,7 @@ public class Import extends ActionBarActivity {
 		    }
 		  }
     
-	//Method for adding the bar graph visualizer to the the visualizer view
+	 // Methods for adding renderers to visualizer
 	private void addBarGraphRenderers() {
 	    Paint paint = new Paint();
 	    paint.setStrokeWidth(50f);

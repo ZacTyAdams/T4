@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.taptwisttunes"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="9"
+        android:targetSdkVersion="20" />
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/icon2"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".Intro"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+             
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity> 
+        <activity
+            
+            android:name=".TapTwistTunes"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="com.example.taptwisttunes.TAPTWISTTUNES" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name=".AudioPlayer"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <service android:name=".MusicService" />
+
+        <activity
+            android:name=".BPMCalc"
+            android:label="@string/title_activity_bpmcalc" >
+        </activity>
+        <activity
+            android:name=".AccelerometerTest"
+            android:label="@string/title_activity_accelerometer_test" >
+        </activity>
+        <activity
+            android:name=".GyroscopeTest"
+            android:label="@string/title_activity_gyroscope_test" >
+        </activity>
+        <activity
+            android:name=".Recorder"
+            android:label="@string/title_activity_recorder" >
+        </activity>
+        <activity
+            android:name=".Import"
+            android:label="@string/title_activity_import" 
+            android:screenOrientation="landscape">
+        </activity>
+        <activity
+            android:name=".TarsosMediaPlayer"
+            android:label="@string/title_activity_tarsos_media_player" >
+        </activity>
+        <activity
+            android:name=".TarsosPitchTest"
+            android:label="@string/title_activity_tarsos_pitch_test" >
+        </activity>
+    </application>
+
+</manifest>

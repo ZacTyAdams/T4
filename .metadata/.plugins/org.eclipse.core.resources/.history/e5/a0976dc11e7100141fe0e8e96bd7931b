@@ -1,0 +1,9 @@
+package com.example.taptwisttunes;
+
+import android.support.v7.app.ActionBarActivity;
+
+public class FileBrowser extends ActionBarActivity {
+	
+	private static final int READ_REQUEST_CODE = 42;
+
+}

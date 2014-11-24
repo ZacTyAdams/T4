@@ -29,9 +29,7 @@ public class Import extends ActionBarActivity {
 	ImageButton browse, stop, play, pause;
 	TextView song;
 	MediaPlayer mediaPlayer;
-	Uri browseUri = null;
 	private MediaPlayer mSilentPlayer;  /* to avoid tunnel player issue */
-	int currentSongPosition = 0;
 	private VisualizerView mVisualizerView;
 	private static final int READ_REQUEST_CODE = 42;
 	
@@ -49,7 +47,17 @@ public class Import extends ActionBarActivity {
 		stop = (ImageButton) findViewById(R.id.stop);
 		song = (TextView) findViewById(R.id.songTitle);
 		
-        //this stops the music playing
+      //This function opens up a file browser to select an audio file
+		browse.setOnClickListener(new View.OnClickListener() {
+		
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				browse(v);
+			}
+		});
+		
+        //this stops the music playing 
 		stop.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -58,88 +66,29 @@ public class Import extends ActionBarActivity {
 				if (mediaPlayer!=null) {
 					mediaPlayer.release();
 					mediaPlayer = null;
-					mVisualizerView.clearRenderers();
-	        		mVisualizerView.release();
-					currentSongPosition = 0;
-				}				
+				}
 			}
 		});
 		
-		//releases the media player and saves the last know location of the song
 		pause.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if(mediaPlayer != null) {
-					if (mediaPlayer.isPlaying()) {
-						currentSongPosition = mediaPlayer.getCurrentPosition();
-						mediaPlayer.release();
-						mediaPlayer = null;
-						mVisualizerView.setEnabled(false);
-						mVisualizerView.release();
-					}
+				if (mediaPlayer!=null) {
+					mediaPlayer.pause();
+					pause.setEnabled(false);
+					play.setEnabled(true);
 				}
 			}
 		});
 		
-		//mediaPlayer.pause() wasn't working occasionally so instead the mediaPlayer is released on 
-		//pause and reopened on play at the location it left off. It's been tested and there is no
-		//lag or issues with this way.
 		play.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub	
-		        	if(mediaPlayer != null) {
-		        		mediaPlayer.release();
-		        		mediaPlayer = null;
-		        		mVisualizerView.clearRenderers();
-		        		mVisualizerView.release();
-		        	}
-	        		mVisualizerView = (VisualizerView) findViewById(R.id.visualizerView);
-	                addBarGraphRenderers();
-		        	mediaPlayer = new MediaPlayer();
-		        	mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-		        	try {
-						mediaPlayer.setDataSource(getApplicationContext(), browseUri);
-					} catch (IllegalArgumentException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (SecurityException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IllegalStateException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-		            try {
-						mediaPlayer.prepare();
-					} catch (IllegalStateException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-		            //song plays
-		            mediaPlayer.start();
-					mediaPlayer.seekTo(currentSongPosition);
-					mVisualizerView.setEnabled(true);
-					mVisualizerView.link(mediaPlayer);
-			}
-		});
-	
-    //open a file browser to select an audio file
-		browse.setOnClickListener(new View.OnClickListener() {
-		
-			@Override
-			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				browse(v);
+					mediaPlayer.start();
 			}
 		});
 	}
@@ -155,17 +104,14 @@ public class Import extends ActionBarActivity {
 	
 	public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
 	    if (requestCode == READ_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-	    	browseUri = null;
+	        // The document selected by the user won't be returned in the intent.
+	        // Instead, a URI to that document will be contained in the return intent
+	        // provided to this method as a parameter.
+	        // Pull that URI using resultData.getData().
+	        Uri browseUri = null;
 	        if (resultData != null) {
 	        	browseUri = resultData.getData();
-	        	if(mediaPlayer != null) {
-	        		mediaPlayer.release();
-	        		mediaPlayer = null;
-	        		mVisualizerView.clearRenderers();
-	        		mVisualizerView.release();
-	        	}
-        		mVisualizerView = (VisualizerView) findViewById(R.id.visualizerView);
-                addBarGraphRenderers();
+	        	if(mediaPlayer != null) mediaPlayer.release();
 	        	mediaPlayer = new MediaPlayer();
 	        	mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 	        	try {
@@ -194,11 +140,11 @@ public class Import extends ActionBarActivity {
 				}
 	            //song plays
 	            mediaPlayer.start();
-	        	mVisualizerView.setEnabled(true);
-	        	// We need to link the visualizer view to the media player so that
+	            // We need to link the visualizer view to the media player so that
 	            // it displays something
-	        	mVisualizerView.link(mediaPlayer);
-
+	            mVisualizerView = (VisualizerView) findViewById(R.id.visualizerView);
+	            mVisualizerView.link(mediaPlayer);
+	            addBarGraphRenderers();
 	        }
 	    }
 	}
@@ -218,7 +164,6 @@ public class Import extends ActionBarActivity {
 	    return s;
 	}*/
 	
-	//This is the work around for the galaxy S4
     private void initTunnelPlayerWorkaround() {
     		// Read "tunnel.decode" system property to determine
 		    // the workaround is needed
@@ -227,7 +172,7 @@ public class Import extends ActionBarActivity {
 		    }
 		  }
     
-	//Method for adding the bar graph visualizer to the the visualizer view
+	 // Methods for adding renderers to visualizer
 	private void addBarGraphRenderers() {
 	    Paint paint = new Paint();
 	    paint.setStrokeWidth(50f);
