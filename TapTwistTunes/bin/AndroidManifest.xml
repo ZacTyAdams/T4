@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="9"
         android:targetSdkVersion="20" />
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -19,7 +19,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".Intro"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
              
                 <action android:name="android.intent.action.MAIN" />
@@ -64,7 +65,8 @@
         </activity>
         <activity
             android:name=".Import"
-            android:label="@string/title_activity_import" >
+            android:label="@string/title_activity_import" 
+            android:screenOrientation="landscape">
         </activity>
         <activity
             android:name=".TarsosMediaPlayer"
