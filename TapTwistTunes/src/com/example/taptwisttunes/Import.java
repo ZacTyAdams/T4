@@ -33,7 +33,8 @@ public class Import extends ActionBarActivity {
 	private MediaPlayer mSilentPlayer;  /* to avoid tunnel player issue */
 	int currentSongPosition = 0;
 	private VisualizerView mVisualizerView;
-	private static final int READ_REQUEST_CODE = 42;
+	static final int REQUEST_AUDIO_MP3 = 1;
+	boolean songSelected; //used to stop play from working until a song is selected
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,8 @@ public class Import extends ActionBarActivity {
 		pause = (ImageButton) findViewById(R.id.pause);
 		stop = (ImageButton) findViewById(R.id.stop);
 		song = (TextView) findViewById(R.id.songTitle);
+		
+		songSelected = false;
 		
         //this stops the music playing
 		stop.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +93,7 @@ public class Import extends ActionBarActivity {
 			
 			@Override
 			public void onClick(View v) {
+				if(songSelected) { //if no song can't press play
 				// TODO Auto-generated method stub	
 		        	if(mediaPlayer != null) {
 		        		mediaPlayer.release();
@@ -130,6 +134,7 @@ public class Import extends ActionBarActivity {
 					mediaPlayer.seekTo(currentSongPosition);
 					mVisualizerView.setEnabled(true);
 					mVisualizerView.link(mediaPlayer);
+				}
 			}
 		});
 	
@@ -147,14 +152,15 @@ public class Import extends ActionBarActivity {
 	// open the file browser to select a song
 	private void browse(View v) {
 		// TODO Auto-generated method stub
-		Intent browseIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+		Intent browseIntent = new Intent();
 		browseIntent.addCategory(Intent.CATEGORY_OPENABLE);
 		browseIntent.setType("*/*");
-		startActivityForResult(browseIntent, READ_REQUEST_CODE);
+		browseIntent.setAction(Intent.ACTION_GET_CONTENT);
+		startActivityForResult(Intent.createChooser(browseIntent, "Open audio file"), REQUEST_AUDIO_MP3);
 	}
 	
 	public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
-	    if (requestCode == READ_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+	    if (requestCode == REQUEST_AUDIO_MP3 && resultCode == Activity.RESULT_OK) {
 	    	browseUri = null;
 	        if (resultData != null) {
 	        	browseUri = resultData.getData();
@@ -198,7 +204,7 @@ public class Import extends ActionBarActivity {
 	        	// We need to link the visualizer view to the media player so that
 	            // it displays something
 	        	mVisualizerView.link(mediaPlayer);
-
+	        	songSelected = true;
 	        }
 	    }
 	}

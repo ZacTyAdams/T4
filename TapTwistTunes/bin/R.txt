@@ -406,12 +406,9 @@ int raw ic_action_upload 0x7f050003
 int raw icon2_r 0x7f050004
 int raw icon3_r 0x7f050005
 int raw loudpipes 0x7f050006
-int raw pause 0x7f050007
-int raw play 0x7f050008
-int raw slider 0x7f050009
-int raw spashsound 0x7f05000a
-int raw stop 0x7f05000b
-int raw workaround_1min 0x7f05000c
+int raw slider 0x7f050007
+int raw spashsound 0x7f050008
+int raw workaround_1min 0x7f050009
 int string abc_action_bar_home_description 0x7f0b0001
 int string abc_action_bar_up_description 0x7f0b0002
 int string abc_action_menu_overflow_description 0x7f0b0003
