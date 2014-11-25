@@ -33,7 +33,7 @@ public class Import extends ActionBarActivity {
 	private MediaPlayer mSilentPlayer;  /* to avoid tunnel player issue */
 	int currentSongPosition = 0;
 	private VisualizerView mVisualizerView;
-	private static final int READ_REQUEST_CODE = 42;
+	static final int REQUEST_AUDIO_MP3 = 1;
 	boolean songSelected; //used to stop play from working until a song is selected
 	
 	@Override
@@ -152,14 +152,15 @@ public class Import extends ActionBarActivity {
 	// open the file browser to select a song
 	private void browse(View v) {
 		// TODO Auto-generated method stub
-		Intent browseIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+		Intent browseIntent = new Intent();
 		browseIntent.addCategory(Intent.CATEGORY_OPENABLE);
 		browseIntent.setType("*/*");
-		startActivityForResult(browseIntent, READ_REQUEST_CODE);
+		browseIntent.setAction(Intent.ACTION_GET_CONTENT);
+		startActivityForResult(Intent.createChooser(browseIntent, "Open audio file"), REQUEST_AUDIO_MP3);
 	}
 	
 	public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
-	    if (requestCode == READ_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+	    if (requestCode == REQUEST_AUDIO_MP3 && resultCode == Activity.RESULT_OK) {
 	    	browseUri = null;
 	        if (resultData != null) {
 	        	browseUri = resultData.getData();
