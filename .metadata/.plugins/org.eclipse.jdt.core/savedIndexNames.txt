@@ -1,17 +1,11 @@
-<<<<<<< HEAD
 INDEX VERSION 1.126+/Users/ZacAtk/School/T4/.metadata/.plugins/org.eclipse.jdt.core
-1790594222.index
-3519899753.index
-3408770898.index
 4193506088.index
-1947064974.index
+853982998.index
+3408770898.index
+3519899753.index
+2531656846.index
 1270315800.index
+1790594222.index
 3141257735.index
 810147974.index
-=======
-INDEX VERSION 1.127+C:\Users\amin\Desktop\GitHub\T4\.metadata\.plugins\org.eclipse.jdt.core
-1148696861.index
-3874997639.index
-1284074322.index
-4239710768.index
->>>>>>> FETCH_HEAD
+1947064974.index
