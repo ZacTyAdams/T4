@@ -35,6 +35,7 @@ public class Import extends ActionBarActivity {
 	private VisualizerView mVisualizerView;
 	static final int REQUEST_AUDIO_MP3 = 1;
 	boolean songSelected; //used to stop play from working until a song is selected
+	boolean isPlaying; 
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +52,8 @@ public class Import extends ActionBarActivity {
 		song = (TextView) findViewById(R.id.songTitle);
 		
 		songSelected = false;
-		
+		isPlaying = false;
+	
         //this stops the music playing
 		stop.setOnClickListener(new View.OnClickListener() {
 			
@@ -59,11 +61,9 @@ public class Import extends ActionBarActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				if (mediaPlayer!=null) {
-					mediaPlayer.release();
-					mediaPlayer = null;
-					mVisualizerView.clearRenderers();
-	        		mVisualizerView.release();
+					cleanUp();
 					currentSongPosition = 0;
+					isPlaying = false;
 				}				
 			}
 		});
@@ -77,10 +77,8 @@ public class Import extends ActionBarActivity {
 				if(mediaPlayer != null) {
 					if (mediaPlayer.isPlaying()) {
 						currentSongPosition = mediaPlayer.getCurrentPosition();
-						mediaPlayer.release();
-						mediaPlayer = null;
-						mVisualizerView.setEnabled(false);
-						mVisualizerView.release();
+						cleanUp();
+						isPlaying = false;
 					}
 				}
 			}
@@ -93,8 +91,9 @@ public class Import extends ActionBarActivity {
 			
 			@Override
 			public void onClick(View v) {
-				if(songSelected) { //if no song can't press play
-				// TODO Auto-generated method stub	
+				if(songSelected && !isPlaying) { //if no song can't press play
+				// TODO Auto-generated method stub
+					initTunnelPlayerWorkaround();
 		        	if(mediaPlayer != null) {
 		        		mediaPlayer.release();
 		        		mediaPlayer = null;
@@ -120,7 +119,8 @@ public class Import extends ActionBarActivity {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-		            try {
+
+           try {
 						mediaPlayer.prepare();
 					} catch (IllegalStateException e) {
 						// TODO Auto-generated catch block
@@ -134,6 +134,7 @@ public class Import extends ActionBarActivity {
 					mediaPlayer.seekTo(currentSongPosition);
 					mVisualizerView.setEnabled(true);
 					mVisualizerView.link(mediaPlayer);
+					isPlaying = true;
 				}
 			}
 		});
@@ -153,7 +154,6 @@ public class Import extends ActionBarActivity {
 	private void browse(View v) {
 		// TODO Auto-generated method stub
 		Intent browseIntent = new Intent();
-		browseIntent.addCategory(Intent.CATEGORY_OPENABLE);
 		browseIntent.setType("*/*");
 		browseIntent.setAction(Intent.ACTION_GET_CONTENT);
 		startActivityForResult(Intent.createChooser(browseIntent, "Open audio file"), REQUEST_AUDIO_MP3);
@@ -163,12 +163,10 @@ public class Import extends ActionBarActivity {
 	    if (requestCode == REQUEST_AUDIO_MP3 && resultCode == Activity.RESULT_OK) {
 	    	browseUri = null;
 	        if (resultData != null) {
+	        	initTunnelPlayerWorkaround();
 	        	browseUri = resultData.getData();
 	        	if(mediaPlayer != null) {
-	        		mediaPlayer.release();
-	        		mediaPlayer = null;
-	        		mVisualizerView.clearRenderers();
-	        		mVisualizerView.release();
+	        		cleanUp();
 	        	}
         		mVisualizerView = (VisualizerView) findViewById(R.id.visualizerView);
                 addBarGraphRenderers();
@@ -205,6 +203,7 @@ public class Import extends ActionBarActivity {
 	            // it displays something
 	        	mVisualizerView.link(mediaPlayer);
 	        	songSelected = true;
+	        	isPlaying = true;
 	        }
 	    }
 	}
@@ -223,6 +222,21 @@ public class Import extends ActionBarActivity {
 	    String s = myFile.getAbsolutePath();
 	    return s;
 	}*/
+	
+	private void cleanUp() {
+	    if (mediaPlayer != null)
+	    {
+	      mVisualizerView.release();
+	      mediaPlayer.release();
+	      mediaPlayer = null;
+	    }
+	    
+	    if (mSilentPlayer != null)
+	    {
+	      mSilentPlayer.release();
+	      mSilentPlayer = null;
+	    }
+	  }
 	
 	//This is the work around for the galaxy S4
     private void initTunnelPlayerWorkaround() {
