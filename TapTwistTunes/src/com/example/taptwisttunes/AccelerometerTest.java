@@ -16,43 +16,46 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
-public class AccelerometerTest extends ActionBarActivity implements SensorEventListener {
+public class AccelerometerTest extends ActionBarActivity implements
+		SensorEventListener {
 
 	private SensorManager senSensorManager;
 	private Sensor senAccelerometer;
-	
+
 	private long lastUpdate = 0;
 	Button hold;
 	public boolean holdStatus = false;
 	private float last_x, last_y, last_z;
 	private static final int SHAKE_THRESHOLD = 600;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_accelerometer_test);
-		
-		//from tutorial
+
+		// from tutorial
 		senSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-		senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-		senSensorManager.registerListener(this, senAccelerometer , SensorManager.SENSOR_DELAY_NORMAL);
-		
+		senAccelerometer = senSensorManager
+				.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+		senSensorManager.registerListener(this, senAccelerometer,
+				SensorManager.SENSOR_DELAY_NORMAL);
+
 		hold = (Button) findViewById(R.id.btListen);
-	    
+
 		hold.setOnTouchListener(new OnTouchListener() {
-	        @Override
+			@Override
 			public boolean onTouch(View v, MotionEvent event) {
-	            switch(event.getAction()) {
-	            case MotionEvent.ACTION_DOWN:
-	                holdStatus = true;
-	                break;
-	            case MotionEvent.ACTION_UP:
-	                holdStatus = false;
-	                break;
-	            }
+				switch (event.getAction()) {
+				case MotionEvent.ACTION_DOWN:
+					holdStatus = true;
+					break;
+				case MotionEvent.ACTION_UP:
+					holdStatus = false;
+					break;
+				}
 				return false;
 			}
-	    });
+		});
 	}
 
 	@Override
@@ -77,87 +80,88 @@ public class AccelerometerTest extends ActionBarActivity implements SensorEventL
 	@Override
 	public void onAccuracyChanged(Sensor arg0, int arg1) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 	@Override
 	public void onSensorChanged(SensorEvent event) {
-		//all from tutorial
-		 Sensor mySensor = event.sensor;
-		 
-		    if (mySensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-		    	float x = event.values[0];
-		        float y = event.values[1];
-		        float z = event.values[2];	
-		        
-		        long curTime = System.currentTimeMillis();
-		        
-		        if ((curTime - lastUpdate) > 100) {
-		            long diffTime = (curTime - lastUpdate);
-		            lastUpdate = curTime;
-		            
-		            float speed = Math.abs(x + y + z - last_x - last_y - last_z)/ diffTime * 10000;
-		            
-		            if (speed > SHAKE_THRESHOLD) {
-		            	incrementNumber();
-		            }
-		            
-		            last_x = x;
-		            last_y = y;
-		            last_z = z;
-		        }
-		    }
-		
+		// all from tutorial
+		Sensor mySensor = event.sensor;
+
+		if (mySensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+			float x = event.values[0];
+			float y = event.values[1];
+			float z = event.values[2];
+
+			long curTime = System.currentTimeMillis();
+
+			if ((curTime - lastUpdate) > 100) {
+				long diffTime = (curTime - lastUpdate);
+				lastUpdate = curTime;
+
+				float speed = Math.abs(x + y + z - last_x - last_y - last_z)
+						/ diffTime * 10000;
+
+				if (speed > SHAKE_THRESHOLD) {
+					incrementNumber();
+				}
+
+				last_x = x;
+				last_y = y;
+				last_z = z;
+			}
+		}
+
 	}
-	
-	//from tutorial
+
+	// from tutorial
 	@Override
 	protected void onPause() {
-	    super.onPause();
-	    senSensorManager.unregisterListener(this);
+		super.onPause();
+		senSensorManager.unregisterListener(this);
 	}
-	
-	//from tutorial
+
+	// from tutorial
 	@Override
 	protected void onResume() {
-	    super.onResume();
-	    senSensorManager.registerListener(this, senAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+		super.onResume();
+		senSensorManager.registerListener(this, senAccelerometer,
+				SensorManager.SENSOR_DELAY_NORMAL);
 	}
-	
-	private void incrementNumber(){
-		
+
+	private void incrementNumber() {
+
 		TextView display = (TextView) findViewById(R.id.aDisplay);
-	
+
 		String curText = (String) display.getText();
-	
-		if (isInteger(curText)){
-			if(holdStatus == true){
+
+		if (isInteger(curText)) {
+			if (holdStatus == true) {
 				Integer value = Integer.parseInt(curText);
 				value++;
 				display.setText(value.toString());
 			}
-		}
-		else{
-			if(holdStatus == true){
-			Integer value = 0;
-			display.setText(value.toString());
+		} else {
+			if (holdStatus == true) {
+				Integer value = 0;
+				display.setText(value.toString());
 			}
 		}
 	}
 
-public static boolean isInteger(String s) {
-    try { 
-        Integer.parseInt(s); 
-    } catch(NumberFormatException e) { 
-        return false; 
-    }
-    // only got here if we didn't return false
-    	return true;
+	public static boolean isInteger(String s) {
+		try {
+			Integer.parseInt(s);
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		// only got here if we didn't return false
+		return true;
 	}
 
-	//@Override
-	//public void onSensorChanged(SensorEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	//}
+	// @Override
+	// public void onSensorChanged(SensorEvent arg0) {
+	// TODO Auto-generated method stub
+
+	// }
 }

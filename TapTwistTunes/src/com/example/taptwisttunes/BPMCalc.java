@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class BPMCalc extends ActionBarActivity {
-	
+
 	Button bButton;
 	TextView bCalc;
 
@@ -17,46 +17,46 @@ public class BPMCalc extends ActionBarActivity {
 	long time2;
 	long averageBPM;
 	int buttonPress;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_bpmcalc);
-		
+
 		bButton = (Button) findViewById(R.id.bButton);
 		bCalc = (TextView) findViewById(R.id.bCalc);
-		
+
 		time1 = System.currentTimeMillis();
-        time2 = System.currentTimeMillis();
-        averageBPM = 0;
-        buttonPress = 0;
-        
-        bButton.setOnClickListener(new View.OnClickListener() {
-			
+		time2 = System.currentTimeMillis();
+		averageBPM = 0;
+		buttonPress = 0;
+
+		bButton.setOnClickListener(new View.OnClickListener() {
+
 			@Override
 			public void onClick(View v) {
-				
-				if(buttonPress == 4) {
+
+				if (buttonPress == 4) {
 					buttonPress = 0;
 					String stringBPM = String.valueOf(averageBPM);
 					bCalc.setText("Average BPM: " + stringBPM + "BPM");
 					averageBPM = 0;
-				}
-				else {
+				} else {
 					time2 = time1;
-				    time1 = System.currentTimeMillis();
-			        long difference = time1 - time2;
-			        long BPM = 60000/difference;
-			        averageBPM = (averageBPM * buttonPress) + BPM;
-			        buttonPress++;
-			        averageBPM = (averageBPM/buttonPress);
-			        String numOfPresses = String.valueOf(5-buttonPress);
-			     	bCalc.setText("Press button " + numOfPresses + " more times");
+					time1 = System.currentTimeMillis();
+					long difference = time1 - time2;
+					long BPM = 60000 / difference;
+					averageBPM = (averageBPM * buttonPress) + BPM;
+					buttonPress++;
+					averageBPM = (averageBPM / buttonPress);
+					String numOfPresses = String.valueOf(5 - buttonPress);
+					bCalc.setText("Press button " + numOfPresses
+							+ " more times");
 				}
-				
+
 			}
 		});
-		
+
 	}
 
 	@Override

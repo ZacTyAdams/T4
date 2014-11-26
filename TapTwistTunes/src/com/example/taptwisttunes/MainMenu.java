@@ -9,51 +9,49 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainMenu extends ActionBarActivity {
-	
+
 	Button musicPlayer;
-	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_menu);
-		
-		//final Intent intent = new Intent(this, AudioPlayer.class);
-		
-		//musicPlayer = (Button) findViewById(R.id.bMusicPlayer);
-		
-		
-		//musicPlayer.setOnClickListener(new View.OnClickListener() {
-			
-			//@Override
-			//public void onClick(View arg0) {
-				//startActivity(intent);
-				
-			//}
-		//});
-		
+
+		// final Intent intent = new Intent(this, AudioPlayer.class);
+
+		// musicPlayer = (Button) findViewById(R.id.bMusicPlayer);
+
+		// musicPlayer.setOnClickListener(new View.OnClickListener() {
+
+		// @Override
+		// public void onClick(View arg0) {
+		// startActivity(intent);
+
+		// }
+		// });
+
 	}
-	
-	public void navigateM(View view){
+
+	public void navigateM(View view) {
 		Intent intent = new Intent(this, AudioPlayer.class);
 		startActivity(intent);
 	}
-	
-	public void navigateB(View view){
+
+	public void navigateB(View view) {
 		Intent intent = new Intent(this, BPMCalc.class);
 		startActivity(intent);
 	}
-	
-	public void navigateA(View view){
+
+	public void navigateA(View view) {
 		Intent intent = new Intent(this, AccelerometerTest.class);
 		startActivity(intent);
 	}
 
-	public void navigateG(View view){
+	public void navigateG(View view) {
 		Intent intent = new Intent(this, GyroscopeTest.class);
 		startActivity(intent);
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

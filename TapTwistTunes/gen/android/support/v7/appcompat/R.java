@@ -15,6 +15,7 @@ public final class R {
 		public static final int abc_slide_out_bottom = 0x7f040004;
 		public static final int abc_slide_out_top = 0x7f040005;
 	}
+
 	public static final class attr {
 		public static final int actionBarDivider = 0x7f01000f;
 		public static final int actionBarItemBackground = 0x7f010010;
@@ -127,6 +128,7 @@ public final class R {
 		public static final int windowFixedWidthMinor = 0x7f010005;
 		public static final int windowSplitActionBar = 0x7f010002;
 	}
+
 	public static final class bool {
 		public static final int abc_action_bar_embed_tabs_pre_jb = 0x7f070000;
 		public static final int abc_action_bar_expanded_action_views_exclusive = 0x7f070001;
@@ -135,12 +137,14 @@ public final class R {
 		public static final int abc_config_showMenuShortcutsWhenKeyboardPresent = 0x7f070003;
 		public static final int abc_split_action_bar_is_narrow = 0x7f070002;
 	}
+
 	public static final class color {
 		public static final int abc_search_url_text_holo = 0x7f080003;
 		public static final int abc_search_url_text_normal = 0x7f080000;
 		public static final int abc_search_url_text_pressed = 0x7f080002;
 		public static final int abc_search_url_text_selected = 0x7f080001;
 	}
+
 	public static final class dimen {
 		public static final int abc_action_bar_default_height = 0x7f090002;
 		public static final int abc_action_bar_icon_vertical_padding = 0x7f090003;
@@ -164,6 +168,7 @@ public final class R {
 		public static final int dialog_fixed_width_major = 0x7f090011;
 		public static final int dialog_fixed_width_minor = 0x7f090012;
 	}
+
 	public static final class drawable {
 		public static final int abc_ab_bottom_solid_dark_holo = 0x7f020000;
 		public static final int abc_ab_bottom_solid_light_holo = 0x7f020001;
@@ -253,6 +258,7 @@ public final class R {
 		public static final int abc_textfield_searchview_right_holo_dark = 0x7f020055;
 		public static final int abc_textfield_searchview_right_holo_light = 0x7f020056;
 	}
+
 	public static final class id {
 		public static final int action_bar = 0x7f06001c;
 		public static final int action_bar_activity_content = 0x7f060015;
@@ -315,9 +321,11 @@ public final class R {
 		public static final int useLogo = 0x7f060003;
 		public static final int withText = 0x7f06000c;
 	}
+
 	public static final class integer {
 		public static final int abc_max_action_buttons = 0x7f0a0000;
 	}
+
 	public static final class layout {
 		public static final int abc_action_bar_decor = 0x7f030000;
 		public static final int abc_action_bar_decor_include = 0x7f030001;
@@ -345,6 +353,7 @@ public final class R {
 		public static final int abc_simple_decor = 0x7f030017;
 		public static final int support_simple_spinner_dropdown_item = 0x7f030024;
 	}
+
 	public static final class string {
 		public static final int abc_action_bar_home_description = 0x7f0b0001;
 		public static final int abc_action_bar_up_description = 0x7f0b0002;
@@ -360,6 +369,7 @@ public final class R {
 		public static final int abc_shareactionprovider_share_with = 0x7f0b000c;
 		public static final int abc_shareactionprovider_share_with_application = 0x7f0b000b;
 	}
+
 	public static final class style {
 		public static final int TextAppearance_AppCompat_Base_CompactMenu_Dialog = 0x7f0c0063;
 		public static final int TextAppearance_AppCompat_Base_SearchResult = 0x7f0c006d;
@@ -501,11 +511,17 @@ public final class R {
 		public static final int Widget_AppCompat_ProgressBar_Horizontal = 0x7f0c0009;
 		public static final int Widget_AppCompat_Spinner_DropDown_ActionBar = 0x7f0c0022;
 	}
+
 	public static final class styleable {
-		public static final int[] ActionBar = { 0x7f010025, 0x7f010026, 0x7f010027, 0x7f010028, 0x7f010029, 0x7f01002a, 0x7f01002b, 0x7f01002c, 0x7f01002d, 0x7f01002e, 0x7f01002f, 0x7f010030, 0x7f010031, 0x7f010032, 0x7f010033, 0x7f010034, 0x7f010035, 0x7f010036, 0x7f010037 };
+		public static final int[] ActionBar = { 0x7f010025, 0x7f010026,
+				0x7f010027, 0x7f010028, 0x7f010029, 0x7f01002a, 0x7f01002b,
+				0x7f01002c, 0x7f01002d, 0x7f01002e, 0x7f01002f, 0x7f010030,
+				0x7f010031, 0x7f010032, 0x7f010033, 0x7f010034, 0x7f010035,
+				0x7f010036, 0x7f010037 };
 		public static final int[] ActionBarLayout = { 0x010100b3 };
 		public static final int ActionBarLayout_android_layout_gravity = 0;
-		public static final int[] ActionBarWindow = { 0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003, 0x7f010004, 0x7f010005, 0x7f010006 };
+		public static final int[] ActionBarWindow = { 0x7f010000, 0x7f010001,
+				0x7f010002, 0x7f010003, 0x7f010004, 0x7f010005, 0x7f010006 };
 		public static final int ActionBarWindow_windowActionBar = 0;
 		public static final int ActionBarWindow_windowActionBarOverlay = 1;
 		public static final int ActionBarWindow_windowFixedHeightMajor = 6;
@@ -534,30 +550,37 @@ public final class R {
 		public static final int ActionBar_titleTextStyle = 5;
 		public static final int[] ActionMenuItemView = { 0x0101013f };
 		public static final int ActionMenuItemView_android_minWidth = 0;
-		public static final int[] ActionMenuView = { };
-		public static final int[] ActionMode = { 0x7f010026, 0x7f01002a, 0x7f01002b, 0x7f01002f, 0x7f010031 };
+		public static final int[] ActionMenuView = {};
+		public static final int[] ActionMode = { 0x7f010026, 0x7f01002a,
+				0x7f01002b, 0x7f01002f, 0x7f010031 };
 		public static final int ActionMode_background = 3;
 		public static final int ActionMode_backgroundSplit = 4;
 		public static final int ActionMode_height = 0;
 		public static final int ActionMode_subtitleTextStyle = 2;
 		public static final int ActionMode_titleTextStyle = 1;
-		public static final int[] ActivityChooserView = { 0x7f01006a, 0x7f01006b };
+		public static final int[] ActivityChooserView = { 0x7f01006a,
+				0x7f01006b };
 		public static final int ActivityChooserView_expandActivityOverflowButtonDrawable = 1;
 		public static final int ActivityChooserView_initialActivityCount = 0;
 		public static final int[] CompatTextView = { 0x7f01006d };
 		public static final int CompatTextView_textAllCaps = 0;
-		public static final int[] LinearLayoutICS = { 0x7f01002e, 0x7f010055, 0x7f010056 };
+		public static final int[] LinearLayoutICS = { 0x7f01002e, 0x7f010055,
+				0x7f010056 };
 		public static final int LinearLayoutICS_divider = 0;
 		public static final int LinearLayoutICS_dividerPadding = 2;
 		public static final int LinearLayoutICS_showDividers = 1;
-		public static final int[] MenuGroup = { 0x0101000e, 0x010100d0, 0x01010194, 0x010101de, 0x010101df, 0x010101e0 };
+		public static final int[] MenuGroup = { 0x0101000e, 0x010100d0,
+				0x01010194, 0x010101de, 0x010101df, 0x010101e0 };
 		public static final int MenuGroup_android_checkableBehavior = 5;
 		public static final int MenuGroup_android_enabled = 0;
 		public static final int MenuGroup_android_id = 1;
 		public static final int MenuGroup_android_menuCategory = 3;
 		public static final int MenuGroup_android_orderInCategory = 4;
 		public static final int MenuGroup_android_visible = 2;
-		public static final int[] MenuItem = { 0x01010002, 0x0101000e, 0x010100d0, 0x01010106, 0x01010194, 0x010101de, 0x010101df, 0x010101e1, 0x010101e2, 0x010101e3, 0x010101e4, 0x010101e5, 0x0101026f, 0x7f01004d, 0x7f01004e, 0x7f01004f, 0x7f010050 };
+		public static final int[] MenuItem = { 0x01010002, 0x0101000e,
+				0x010100d0, 0x01010106, 0x01010194, 0x010101de, 0x010101df,
+				0x010101e1, 0x010101e2, 0x010101e3, 0x010101e4, 0x010101e5,
+				0x0101026f, 0x7f01004d, 0x7f01004e, 0x7f01004f, 0x7f010050 };
 		public static final int MenuItem_actionLayout = 14;
 		public static final int MenuItem_actionProviderClass = 16;
 		public static final int MenuItem_actionViewClass = 15;
@@ -575,7 +598,9 @@ public final class R {
 		public static final int MenuItem_android_titleCondensed = 8;
 		public static final int MenuItem_android_visible = 4;
 		public static final int MenuItem_showAsAction = 13;
-		public static final int[] MenuView = { 0x010100ae, 0x0101012c, 0x0101012d, 0x0101012e, 0x0101012f, 0x01010130, 0x01010131, 0x01010438 };
+		public static final int[] MenuView = { 0x010100ae, 0x0101012c,
+				0x0101012d, 0x0101012e, 0x0101012f, 0x01010130, 0x01010131,
+				0x01010438 };
 		public static final int MenuView_android_headerBackground = 4;
 		public static final int MenuView_android_horizontalDivider = 2;
 		public static final int MenuView_android_itemBackground = 5;
@@ -584,13 +609,16 @@ public final class R {
 		public static final int MenuView_android_preserveIconSpacing = 7;
 		public static final int MenuView_android_verticalDivider = 3;
 		public static final int MenuView_android_windowAnimationStyle = 0;
-		public static final int[] SearchView = { 0x0101011f, 0x01010220, 0x01010264, 0x7f01005a, 0x7f01005b };
+		public static final int[] SearchView = { 0x0101011f, 0x01010220,
+				0x01010264, 0x7f01005a, 0x7f01005b };
 		public static final int SearchView_android_imeOptions = 2;
 		public static final int SearchView_android_inputType = 1;
 		public static final int SearchView_android_maxWidth = 0;
 		public static final int SearchView_iconifiedByDefault = 3;
 		public static final int SearchView_queryHint = 4;
-		public static final int[] Spinner = { 0x010100af, 0x01010175, 0x01010176, 0x01010262, 0x010102ac, 0x010102ad, 0x7f010051, 0x7f010052, 0x7f010053, 0x7f010054 };
+		public static final int[] Spinner = { 0x010100af, 0x01010175,
+				0x01010176, 0x01010262, 0x010102ac, 0x010102ad, 0x7f010051,
+				0x7f010052, 0x7f010053, 0x7f010054 };
 		public static final int Spinner_android_dropDownHorizontalOffset = 4;
 		public static final int Spinner_android_dropDownSelector = 1;
 		public static final int Spinner_android_dropDownVerticalOffset = 5;
@@ -601,7 +629,8 @@ public final class R {
 		public static final int Spinner_popupPromptView = 8;
 		public static final int Spinner_prompt = 6;
 		public static final int Spinner_spinnerMode = 7;
-		public static final int[] Theme = { 0x7f010047, 0x7f010048, 0x7f010049, 0x7f01004a, 0x7f01004b, 0x7f01004c };
+		public static final int[] Theme = { 0x7f010047, 0x7f010048, 0x7f010049,
+				0x7f01004a, 0x7f01004b, 0x7f01004c };
 		public static final int Theme_actionDropDownStyle = 0;
 		public static final int Theme_dropdownListPreferredItemHeight = 1;
 		public static final int Theme_listChoiceBackgroundIndicator = 5;
