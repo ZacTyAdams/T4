@@ -14,9 +14,7 @@
 <fullyQualifiedTypeName name="android.view.View"/>
 <fullyQualifiedTypeName name="android.hardware.Sensor"/>
 <fullyQualifiedTypeName name="android.R.id"/>
-<fullyQualifiedTypeName name="android.R"/>
 <fullyQualifiedTypeName name="android.R.layout"/>
-<fullyQualifiedTypeName name="android.support.v7.appcompat.R"/>
 <fullyQualifiedTypeName name="android.widget.SeekBar"/>
 <fullyQualifiedTypeName name="android.widget.TextView"/>
 <fullyQualifiedTypeName name="be.tarsos.dsp.io.android.AudioDispatcherFactory"/>
@@ -25,7 +23,19 @@
 <fullyQualifiedTypeName name="android.widget.Button"/>
 <fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
 <fullyQualifiedTypeName name="com.example.taptwisttunes.R.id"/>
-<fullyQualifiedTypeName name="com.example.taptwisttunes.R.raw"/>
 <fullyQualifiedTypeName name="android.media.AudioFormat"/>
 <fullyQualifiedTypeName name="java.nio.ByteOrder"/>
+<fullyQualifiedTypeName name="be.tarsos.dsp.AudioDispatcher"/>
+<fullyQualifiedTypeName name="be.tarsos.dsp.WaveformSimilarityBasedOverlapAdd"/>
+<fullyQualifiedTypeName name="be.tarsos.dsp.resample.RateTransposer"/>
+<fullyQualifiedTypeName name="java.io.InputStream"/>
+<fullyQualifiedTypeName name="java.io.BufferedInputStream"/>
+<fullyQualifiedTypeName name="java.io.FileInputStream"/>
+<fullyQualifiedTypeName name="be.tarsos.dsp.io.TarsosDSPAudioFormat"/>
+<fullyQualifiedTypeName name="be.tarsos.dsp.io.UniversalAudioInputStream"/>
+<fullyQualifiedTypeName name="be.tarsos.dsp.WaveformSimilarityBasedOverlapAdd.Parameters"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="com.example.taptwisttunes.R.raw"/>
+<fullyQualifiedTypeName name="android.R"/>
+<fullyQualifiedTypeName name="android.support.v7.appcompat.R"/>
 </qualifiedTypeNameHistroy>
