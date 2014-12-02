@@ -67,7 +67,7 @@
         <activity
             android:name=".Import"
             android:label="@string/title_activity_import" 
-            android:screenOrientation="landscape">
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".TarsosMediaPlayer"

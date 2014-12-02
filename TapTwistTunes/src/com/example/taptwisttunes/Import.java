@@ -48,7 +48,7 @@ import android.widget.TextView;
 public class Import extends ActionBarActivity {
 
 	ImageButton browse, stop, play, pause;
-	SeekBar pitch, tempoS;
+	//SeekBar pitch, tempoS;
 	TextView song;
 	MediaPlayer mediaPlayer;
 	Uri browseUri = null;
@@ -85,15 +85,15 @@ public class Import extends ActionBarActivity {
 		pause = (ImageButton) findViewById(R.id.pause);
 		stop = (ImageButton) findViewById(R.id.stop);
 		song = (TextView) findViewById(R.id.songTitle);
-		pitch = (SeekBar) findViewById(R.id.seekBar1);
-		tempoS = (SeekBar) findViewById(R.id.seekBar2);
+		//pitch = (SeekBar) findViewById(R.id.seekBar1);
+		//tempoS = (SeekBar) findViewById(R.id.seekBar2);
 
 		songSelected = false;
 		isPlaying = false;
 		
-		song.setText("" + pitch.getProgress());
+		//song.setText("" + pitch.getProgress());
 		
-		pitch.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+		/*pitch.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 			
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
@@ -120,9 +120,9 @@ public class Import extends ActionBarActivity {
 				}
 				song.setText("" + currentFactor);
 			}
-		});
+		});*/
 		
-		tempoS.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+		/*tempoS.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 			
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
@@ -147,7 +147,7 @@ public class Import extends ActionBarActivity {
 				}
 				song.setText("" + tempo);				
 			}
-		});
+		});*/
 
 		// this stops the music playing
 		stop.setOnClickListener(new View.OnClickListener() {
@@ -314,8 +314,6 @@ public class Import extends ActionBarActivity {
 				if (mediaPlayer != null) {
 					cleanUp();
 				}
-				mVisualizerView = (VisualizerView) findViewById(R.id.visualizerView);
-				addBarGraphRenderers();
 				mediaPlayer = new MediaPlayer();
 				mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 				try {
@@ -346,11 +344,11 @@ public class Import extends ActionBarActivity {
 				// song plays
 				//mediaPlayer.start();
 				//mediaPlayer.setVolume(0, 0); //trying to silent media player for the visualizer
-				mVisualizerView.setEnabled(true);
+				//mVisualizerView.setEnabled(true);
 				// We need to link the visualizer view to the media player so
 				// that
 				// it displays something
-				mVisualizerView.link(mediaPlayer);
+				//mVisualizerView.link(mediaPlayer);
 				songSelected = true;
 				isPlaying = true;
 				
@@ -397,7 +395,7 @@ public class Import extends ActionBarActivity {
 	}
 
 	// Method for adding the bar graph visualizer to the the visualizer view
-	private void addBarGraphRenderers() {
+	/*private void addBarGraphRenderers() {
 		Paint paint = new Paint();
 		paint.setStrokeWidth(50f);
 		paint.setAntiAlias(true);
@@ -413,5 +411,5 @@ public class Import extends ActionBarActivity {
 		BarGraphRenderer barGraphRendererTop = new BarGraphRenderer(16, paint2,
 				true);
 		mVisualizerView.addRenderer(barGraphRendererTop);
-	}
+	}*/
 }

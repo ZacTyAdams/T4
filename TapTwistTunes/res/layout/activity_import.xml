@@ -4,8 +4,141 @@
     android:layout_height="match_parent"
     android:orientation="vertical" 
     android:weightSum="1">
+    
+     <TextView
+ 		  android:id="@+id/songTitle"
+ 		  android:layout_width="match_parent"
+ 		  android:layout_height="wrap_content"
+ 		  android:background="@drawable/green_background"
+ 		  android:gravity="center_vertical|center_horizontal"
+ 		  android:text="Counting Stars"
+ 		  android:textColor="#ECF0F1"
+ 		  android:textSize="20dp"
+ 		  android:layout_weight=".1" 
+ 		  android:textStyle="bold"/>
+     
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_weight=".8"
+         android:weightSum="1"
+         android:orientation="horizontal">
+         
+         <LinearLayout
+         	android:layout_width="wrap_content"
+         	android:layout_height="match_parent"
+         	android:layout_weight=".1"
+         	android:orientation="vertical">
+         	
+            <Button
+               android:id="@+id/bPitchUp"
+               android:layout_width="match_parent"
+ 		       android:layout_height="wrap_content"
+ 		       android:background="#blue_background"
+ 		       android:layout_weight=".5" 
+ 		       android:textColor="#ECF0F1"
+ 		       android:textSize="50dp"
+ 	           android:text="+"
+ 	           android:textStyle="bold" />
+            
+            <Button
+               android:id="@+id/bToneUp"
+               android:layout_width="match_parent"
+ 		       android:layout_height="wrap_content"
+ 		       android:background="@drawable/red_background"
+ 		       android:layout_weight=".5" 
+ 		       android:textColor="#ECF0F1"
+ 		       android:textSize="50dp"
+ 	           android:text="+"
+ 	           android:textStyle="bold" />
+       
+     	 </LinearLayout>
+     	
+         <LinearLayout
+         	android:layout_width="wrap_content"
+         	android:layout_height="match_parent"
+         	android:layout_weight=".8"
+         	android:orientation="vertical">
+         
+             <ImageButton
+ 		        android:id="@+id/play"
+ 		        android:layout_width="match_parent"
+ 		        android:layout_height="wrap_content"
+ 		        android:layout_weight=".25"
+ 		        android:background="@drawable/blue_background"
+ 		        android:src="@raw/ic_action_play" />
+ 		    
+ 		     <ImageButton
+ 		        android:id="@+id/pause"
+ 		        android:layout_width="match_parent"
+ 		        android:layout_height="wrap_content"
+ 		        android:layout_weight=".25"
+ 		        android:background="@drawable/blue_background"
+ 		        android:src="@raw/ic_action_pause" />
+ 		    
+ 		    <ImageButton
+ 		        android:id="@+id/stop"
+ 		        android:layout_width="match_parent"
+ 		        android:layout_height="wrap_content"
+ 		        android:layout_weight=".25"
+ 		        android:background="@drawable/red_background"
+ 		        android:src="@raw/ic_action_stop" />
+ 		    
+ 		    <ImageButton
+ 		        android:id="@+id/upload"
+ 		        android:layout_width="match_parent"
+ 		        android:layout_height="wrap_content"
+ 		        android:layout_weight=".25"
+ 		       	android:background="@drawable/red_background"
+ 		    	android:src="@raw/ic_action_upload" />
+     	 </LinearLayout>
+     	
+         <LinearLayout
+         	android:layout_width="wrap_content"
+         	android:layout_height="match_parent"
+         	android:layout_weight=".1"
+         	android:orientation="vertical">
+            
+             <Button
+               android:id="@+id/bPitchDown"
+               android:layout_width="match_parent"
+ 		       android:layout_height="wrap_content"
+ 		       android:background="#FEE608"
+ 		       android:layout_weight=".5" 
+ 		       android:textColor="#ECF0F1"
+ 		       android:textSize="50dp"
+ 	           android:text="-"
+ 	           android:textStyle="bold" />
+            
+            <Button
+               android:id="@+id/bToneDown"
+               android:layout_width="match_parent"
+ 		       android:layout_height="wrap_content"
+ 		       android:background="@drawable/red_background"
+ 		       android:layout_weight=".5" 
+ 		       android:textColor="#ECF0F1"
+ 		       android:textSize="50dp"
+ 	           android:text="-"
+ 	           android:textStyle="bold" />
+         
+     	 </LinearLayout>
+         
+     </LinearLayout>
+     
+     <Button
+        android:id="@+id/bTimeStretch"
+        android:layout_width="match_parent"
+ 		android:layout_height="wrap_content"
+ 		android:background="@drawable/green_background"
+ 		android:layout_weight=".1" 
+ 		android:textColor="#ECF0F1"
+ 		android:textSize="20dp"
+ 	    android:text="BPM"
+ 	    android:textStyle="bold" />
+     
+</LinearLayout>
 
- 	<LinearLayout
+<!-- 	<LinearLayout
  	    android:layout_width="match_parent"
  	    android:layout_height="wrap_content"
  	    android:orientation="vertical"
@@ -164,6 +297,4 @@
 
  		</LinearLayout>
  	    
- 	</LinearLayout>
-    
-</LinearLayout>
+ 	</LinearLayout> -->
