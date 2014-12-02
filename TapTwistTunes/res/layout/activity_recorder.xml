@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:addStatesFromChildren="true"
     android:background="#FEE668"
     android:orientation="vertical"
     android:weightSum="100"
@@ -55,7 +56,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="29dp"
         android:layout_weight="6.31"
+        android:enabled="false"
         android:gravity="center"
+        android:text="READY TO RECORD"
         android:textColor="#ECF0F1"
         android:textSize="32dp"
         android:textStyle="bold" />

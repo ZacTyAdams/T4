@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+     android:weightSum="1">
+
+    <LinearLayout 
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:orientation="horizontal">
+      	<ImageView
+      	    android:id="@+id/uploadIcon"
+      	    android:width="40dp"
+      	    android:layout_width="wrap_content"
+      	    android:layout_height="match_parent"
+      	    android:src="@raw/ic_action_upload" />
+    
+    	<TextView
+        	android:id="@+id/uploadText"
+        	android:layout_width="wrap_content"
+        	android:layout_height="match_parent"
+        	android:text="Upload"
+        	android:gravity="center_vertical" />
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:orientation="horizontal"
+    	android:weightSum="1">
+    	
+    	<ImageView
+      	    android:id="@+id/stopIcon"
+      	    android:width="40dp"
+      	    android:layout_width="wrap_content"
+      	    android:layout_height="match_parent"
+      	    android:src="@raw/ic_action_stop" />
+    
+    	<TextView
+        	android:id="@+id/stopText"
+        	android:layout_width="wrap_content"
+        	android:layout_height="match_parent"
+        	android:text="Stop"
+        	android:gravity="center_vertical" />
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:orientation="horizontal">
+    
+    	<ImageView
+      	    android:id="@+id/refreshIcon"
+      	    android:width="40dp"
+      	    android:layout_width="wrap_content"
+      	    android:layout_height="match_parent"
+      	    android:src="@raw/ic_action_refresh" />
+    
+    	<TextView
+    	    android:id="@+id/refreshText"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="match_parent"
+    	    android:gravity="center_vertical"
+    	    android:text="Return song to a default state" />
+    	
+    	</LinearLayout>
+    	
+    <LinearLayout 
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:orientation="horizontal">
+
+    	<TextView
+    	    android:id="@+id/plus"
+    	    android:width="40dp"
+      	    android:layout_width="wrap_content"
+    	    android:layout_height="match_parent"
+    	    android:gravity="center_vertical|center_horizontal"
+    	    android:text=" + "
+    	    android:textColor="#ECF0F1"
+    	    android:textSize="32dp"
+    	    android:textStyle="bold" />
+
+    	<TextView
+    	    android:id="@+id/plusText"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="match_parent"
+    	    android:gravity="center_vertical"
+    	    android:text="Hold and move phone to raise pitch" />
+
+    	</LinearLayout>
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:orientation="horizontal">
+    	
+        <TextView
+    	    android:id="@+id/minus"
+    	    android:width="40dp"
+      	    android:layout_width="wrap_content"
+    	    android:layout_height="match_parent"
+    	    android:gravity="center_vertical|center_horizontal"
+    	    android:text=" - "
+    	    android:textColor="#ECF0F1"
+    	    android:textSize="32dp"
+    	    android:textStyle="bold" />
+        
+    	<TextView
+        	android:id="@+id/minusText"
+        	android:layout_width="wrap_content"
+        	android:layout_height="match_parent"
+        	android:text="Hold and move phone to lower pitch"
+        	android:gravity="center_vertical"/>
+    
+    </LinearLayout>
+    <LinearLayout 
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:orientation="horizontal">
+    	
+        <TextView
+    	    android:id="@+id/tone"
+    	    android:width="40dp"
+      	    android:layout_width="wrap_content"
+    	    android:layout_height="match_parent"
+    	    android:gravity="center_vertical|center_horizontal"
+    	    android:text="Tone"
+    	    android:textColor="#ECF0F1"
+    	    android:textStyle="bold" />
+        
+    	<TextView
+        	android:id="@+id/toneButton"
+        	android:layout_width="wrap_content"
+        	android:layout_height="match_parent"
+        	android:text="Press and tilt left to raise tone or right to lower tone"
+        	android:gravity="center_vertical" />
+    	</LinearLayout>
+    <LinearLayout 
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:orientation="horizontal">
+    	<TextView
+    	    android:id="@+id/BPM"
+    	    android:width="40dp"
+      	    android:layout_width="wrap_content"
+    	    android:layout_height="match_parent"
+    	    android:gravity="center_vertical|center_horizontal"
+    	    android:text="BPM"
+    	    android:textColor="#ECF0F1"
+    	    android:textStyle="bold" />
+    	<TextView
+        	android:id="@+id/bpmButton"
+        	android:layout_width="wrap_content"
+        	android:layout_height="match_parent"
+        	android:text="Tap for 10 seconds to change speed"
+        	android:gravity="center_vertical" />
+    	</LinearLayout>
+	
+</LinearLayout>

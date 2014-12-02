@@ -5,296 +5,118 @@
     android:orientation="vertical" 
     android:weightSum="1">
     
-     <TextView
- 		  android:id="@+id/songTitle"
- 		  android:layout_width="match_parent"
- 		  android:layout_height="wrap_content"
- 		  android:background="@drawable/green_background"
- 		  android:gravity="center_vertical|center_horizontal"
- 		  android:text="Counting Stars"
- 		  android:textColor="#ECF0F1"
- 		  android:textSize="20dp"
- 		  android:layout_weight=".1" 
- 		  android:textStyle="bold"/>
-     
-     <LinearLayout
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:layout_weight=".8"
-         android:weightSum="1"
-         android:orientation="horizontal">
-         
-         <LinearLayout
-         	android:layout_width="wrap_content"
-         	android:layout_height="match_parent"
-         	android:layout_weight=".1"
-         	android:orientation="vertical">
-         	
-            <Button
-               android:id="@+id/bPitchUp"
-               android:layout_width="match_parent"
- 		       android:layout_height="wrap_content"
- 		       android:background="#blue_background"
- 		       android:layout_weight=".5" 
- 		       android:textColor="#ECF0F1"
- 		       android:textSize="50dp"
- 	           android:text="+"
- 	           android:textStyle="bold" />
-            
-            <Button
-               android:id="@+id/bToneUp"
-               android:layout_width="match_parent"
- 		       android:layout_height="wrap_content"
- 		       android:background="@drawable/red_background"
- 		       android:layout_weight=".5" 
- 		       android:textColor="#ECF0F1"
- 		       android:textSize="50dp"
- 	           android:text="+"
- 	           android:textStyle="bold" />
-       
-     	 </LinearLayout>
-     	
-         <LinearLayout
-         	android:layout_width="wrap_content"
-         	android:layout_height="match_parent"
-         	android:layout_weight=".8"
-         	android:orientation="vertical">
-         
-             <ImageButton
- 		        android:id="@+id/play"
- 		        android:layout_width="match_parent"
- 		        android:layout_height="wrap_content"
- 		        android:layout_weight=".25"
- 		        android:background="@drawable/blue_background"
- 		        android:src="@raw/ic_action_play" />
- 		    
- 		     <ImageButton
- 		        android:id="@+id/pause"
- 		        android:layout_width="match_parent"
- 		        android:layout_height="wrap_content"
- 		        android:layout_weight=".25"
- 		        android:background="@drawable/blue_background"
- 		        android:src="@raw/ic_action_pause" />
- 		    
- 		    <ImageButton
+   <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight=".05"
+        android:weightSum="1">
+        
+        <TextView
+ 		  android:id="@+id/space"
+ 		  android:layout_width="wrap_content"
+ 		  android:layout_height="match_parent"
+ 		  android:background="@drawable/blue_background"
+ 		  android:layout_weight=".05" />
+        
+        <TextView
+            android:id="@+id/songTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight=".85"
+            android:background="@drawable/blue_background"
+            android:gravity="center_vertical"
+            android:text="Waiting for Song"
+            android:textColor="#ECF0F1"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+        
+        <ImageButton
+ 		     android:id="@+id/upload"
+ 		     android:layout_width="wrap_content"
+ 		     android:layout_height="match_parent"
+ 		     android:layout_weight=".1"
+ 		     android:background="@drawable/blue_background"
+ 		     android:src="@raw/ic_action_upload" />
+    
+    </LinearLayout>
+    
+   <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight=".225"
+        android:weightSum="1">
+
+        <ImageButton
  		        android:id="@+id/stop"
- 		        android:layout_width="match_parent"
- 		        android:layout_height="wrap_content"
- 		        android:layout_weight=".25"
- 		        android:background="@drawable/red_background"
+ 		        android:layout_width="wrap_content"
+ 		        android:layout_height="match_parent"
+ 		        android:layout_weight=".5"
+ 		        android:background="#FEE668"
  		        android:src="@raw/ic_action_stop" />
  		    
  		    <ImageButton
- 		        android:id="@+id/upload"
- 		        android:layout_width="match_parent"
- 		        android:layout_height="wrap_content"
- 		        android:layout_weight=".25"
- 		       	android:background="@drawable/red_background"
- 		    	android:src="@raw/ic_action_upload" />
-     	 </LinearLayout>
-     	
-         <LinearLayout
-         	android:layout_width="wrap_content"
-         	android:layout_height="match_parent"
-         	android:layout_weight=".1"
-         	android:orientation="vertical">
-            
-             <Button
-               android:id="@+id/bPitchDown"
-               android:layout_width="match_parent"
- 		       android:layout_height="wrap_content"
- 		       android:background="#FEE608"
- 		       android:layout_weight=".5" 
- 		       android:textColor="#ECF0F1"
- 		       android:textSize="50dp"
- 	           android:text="-"
- 	           android:textStyle="bold" />
-            
-            <Button
-               android:id="@+id/bToneDown"
-               android:layout_width="match_parent"
- 		       android:layout_height="wrap_content"
- 		       android:background="@drawable/red_background"
- 		       android:layout_weight=".5" 
- 		       android:textColor="#ECF0F1"
- 		       android:textSize="50dp"
- 	           android:text="-"
- 	           android:textStyle="bold" />
-         
-     	 </LinearLayout>
-         
-     </LinearLayout>
-     
-     <Button
-        android:id="@+id/bTimeStretch"
+ 		        android:id="@+id/bRefresh"
+ 		        android:layout_width="wrap_content"
+ 		        android:layout_height="match_parent"
+ 		        android:layout_weight=".5"
+ 		       	android:background="#FEE668"
+ 		    	android:src="@raw/ic_action_refresh" />
+    
+    </LinearLayout>
+    
+   <LinearLayout
         android:layout_width="match_parent"
- 		android:layout_height="wrap_content"
- 		android:background="@drawable/green_background"
- 		android:layout_weight=".1" 
- 		android:textColor="#ECF0F1"
- 		android:textSize="20dp"
- 	    android:text="BPM"
- 	    android:textStyle="bold" />
-     
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight=".225"
+        android:weightSum="1">
+
+        <Button
+                   android:id="@+id/bPitchUp"
+                   android:layout_width="wrap_content"
+ 		           android:layout_height="match_parent"
+ 		           android:background="#FEE668"
+ 		           android:layout_weight=".5" 
+ 		           android:textColor="#2DCC71"
+ 		           android:textSize="50dp"
+ 	               android:text="+"
+                   android:textStyle="bold" />
+   	            
+   	            <Button
+                  android:id="@+id/bPitchDown"
+                  android:layout_width="wrap_content"
+ 		          android:layout_height="match_parent"
+ 		          android:background="#FEE668"
+ 		          android:layout_weight=".5" 
+ 		          android:textColor="#E74C3C"
+ 		          android:textSize="50dp"
+ 	              android:text="-"
+        		  android:textStyle="bold" />
+    
+    </LinearLayout>
+    
+      	        <Button
+                  android:id="@+id/bTone"
+                  android:layout_width="match_parent"
+ 		          android:layout_height="wrap_content"
+ 		          android:background="@drawable/green_background"
+ 		          android:layout_weight=".25" 
+ 		          android:textColor="#ECF0F1"
+ 	              android:text="Tone"
+ 	              android:textSize="32dp"
+                  android:textStyle="bold" />
+   	        
+   	        <Button
+                  android:id="@+id/bBPM"
+                  android:layout_width="match_parent"
+ 		          android:layout_height="wrap_content"
+ 		          android:background="@drawable/red_background"
+ 		          android:layout_weight=".25" 
+ 		          android:textColor="#ECF0F1"
+ 	              android:text="BPM"
+ 	              android:textSize="32dp"
+                  android:textStyle="bold"  />
+      
 </LinearLayout>
-
-<!-- 	<LinearLayout
- 	    android:layout_width="match_parent"
- 	    android:layout_height="wrap_content"
- 	    android:orientation="vertical"
- 	    android:layout_weight=".1"
- 	    android:weightSum="1" >
-
- <LinearLayout
- 		    android:layout_width="match_parent"
- 		    android:layout_height="wrap_content"
- 		    android:layout_weight=".8"
- 		    android:orientation="horizontal"
- 		    android:weightSum="1" >
- 		    
- 		    <TextView
- 		        android:id="@+id/songTitle"
- 		        android:layout_width="wrap_content"
- 		        android:layout_height="match_parent"
- 		        android:layout_weight=".9"
- 		        android:background="@drawable/green_background"
- 		        android:gravity="center_vertical"
- 		        android:text="	Counting Stars"
- 		        android:textColor="#ECF0F1"
- 		        android:textSize="20dp" 
- 		        android:textStyle="bold"/>
- 		    
- 		    <LinearLayout
- 		    android:layout_width="wrap_content"
- 		    android:layout_height="match_parent"
- 		    android:layout_weight=".1"
- 		    android:orientation="vertical"
- 		    android:weightSum="1" >
- 		    
- 		        <Button
- 		            android:id="@+id/space3"
- 		            android:layout_width="match_parent"
- 		            android:layout_height="wrap_content"
- 		            android:layout_weight=".1"
- 		            android:background="@drawable/green_background"
- 		            android:minHeight="0dp" />
- 		    
- 		        <LinearLayout
- 		    		android:layout_width="match_parent"
- 		    		android:layout_height="wrap_content"
- 		   		    android:layout_weight=".8"
- 		    		android:orientation="horizontal"
- 		    		android:weightSum="1" >
- 		    
- 		    		<ImageButton
- 		        		android:id="@+id/play"
- 		        		android:layout_width="wrap_content"
- 		        		android:layout_height="match_parent"
- 		        		android:layout_weight=".25"
- 		        		android:background="@drawable/green_background"
- 		        		android:src="@raw/ic_action_play" />
- 		    
- 		    		<ImageButton
- 		        		android:id="@+id/pause"
- 		        		android:layout_width="wrap_content"
- 		        		android:layout_height="match_parent"
- 		        		android:layout_weight=".25"
- 		        		android:background="@drawable/green_background"
- 		        		android:src="@raw/ic_action_pause" />
- 		    
- 		    		<ImageButton
- 		        		android:id="@+id/stop"
- 		        		android:layout_width="wrap_content"
- 		        		android:layout_height="match_parent"
- 		        		android:layout_weight=".25"
- 		        		android:background="@drawable/green_background"
- 		        		android:src="@raw/ic_action_stop" />
- 		    
- 		    		<ImageButton
- 		        		android:id="@+id/upload"
- 		        		android:layout_width="wrap_content"
- 		        		android:layout_height="match_parent"
- 		        		android:layout_weight=".25"
- 		       			android:background="@drawable/green_background"
- 		    	    	android:src="@raw/ic_action_upload" />
- 		    		
- 		    	</LinearLayout>
- 		    	
- 		        <Button
- 		            android:id="@+id/space4"
- 		            android:layout_width="match_parent"
- 		            android:layout_height="wrap_content"
- 		            android:layout_weight=".1"
- 		            android:background="@drawable/green_background"
- 		            android:minHeight="0dp" />
- 		   
- 		    </LinearLayout>
-
- 		</LinearLayout>
-
- 		<Button
- 			android:id="@+id/space"
-        	android:layout_width="match_parent"
-        	android:layout_height="wrap_content"
-        	android:layout_weight=".2"
-        	android:background="#FEE668"/>
- 	    
- 	</LinearLayout>
- 	
- 	<com.example.taptwisttunes.visualizer.VisualizerView
-            android:id="@+id/visualizerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" 
-            android:background="#FEE668"
-            android:layout_weight=".8"/>
- 	
- 	<LinearLayout
- 	    android:layout_width="match_parent"
- 		android:layout_height="wrap_content"
- 		android:layout_weight=".1"
- 		android:orientation="vertical"
- 		android:weightSum="1" >
-
- 		<Button
- 		    android:id="@+id/space2"
- 		    android:layout_width="match_parent"
- 		    android:layout_height="wrap_content"
- 		    android:layout_weight=".3"
- 		    android:background="#FEE668"
- 		    android:minHeight="0dp" />
-
- 		<LinearLayout
- 		    android:layout_width="match_parent"
- 		    android:layout_height="wrap_content"
- 		    android:layout_weight=".7"
- 		    android:gravity="bottom"
- 		    android:orientation="horizontal"
- 		    android:weightSum="1" >
-
- 		    <SeekBar
- 		        android:id="@+id/seekBar2"
- 		        android:layout_width="wrap_content"
- 		        android:layout_height="match_parent"
- 		        android:layout_weight=".5"
- 		        android:background="#FEE668"
- 		        android:max="200"
- 		        android:minHeight="50dp"
- 		        android:progress="50"
- 		        android:progressDrawable="@drawable/progress"
- 		        android:thumb="@raw/slider" />
-
- 		    <SeekBar
- 		        android:id="@+id/seekBar1"
- 		        android:layout_width="wrap_content"
- 		        android:layout_height="match_parent"
- 		        android:layout_weight=".5"
- 		        android:background="#FEE668"
- 		        android:max="200"
- 		        android:minHeight="50dp"
- 		        android:progress="100"
- 		        android:progressDrawable="@drawable/progress"
- 		        android:thumb="@raw/slider" />
-
- 		</LinearLayout>
- 	    
- 	</LinearLayout> -->

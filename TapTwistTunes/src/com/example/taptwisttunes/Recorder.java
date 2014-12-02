@@ -27,10 +27,11 @@ public class Recorder extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		requestWindowFeature(Window.FEATURE_ACTION_BAR);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_recorder);
+		setTitle("Audio Recorder");
 
 		// initialize all the buttons
 		record = (Button) findViewById(R.id.bRecord);
@@ -45,7 +46,7 @@ public class Recorder extends ActionBarActivity {
 		File myNewFolder = new File(extStorageDirectory + "/" + newFolder);
 		myNewFolder.mkdir();
 		mediaFile = Environment.getExternalStorageDirectory().toString() + "/"
-				+ newFolder + "/myRecordings.mp3";
+				+ newFolder + "/myRecordings.wav";
 
 		// disable buttons that can't use until we record
 		stop.setEnabled(false);
@@ -150,7 +151,7 @@ public class Recorder extends ActionBarActivity {
 		}
 	}
 
-	@Override
+	/*@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.recorder, menu);
@@ -167,5 +168,5 @@ public class Recorder extends ActionBarActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
+	}*/
 }
