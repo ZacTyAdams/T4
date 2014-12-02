@@ -24,7 +24,6 @@
 
 package be.tarsos.dsp;
 
-import android.annotation.SuppressLint;
 import android.util.Log;
 
 
@@ -115,7 +114,7 @@ public class WaveformSimilarityBasedOverlapAdd implements AudioProcessor {
 		return sampleReq;
 	}
 	
-	public int getOutputBufferSize(){ //changed to public
+	private int getOutputBufferSize(){
 		return seekWindowLength - overlapLength;
 	}
 	
@@ -216,7 +215,7 @@ public class WaveformSimilarityBasedOverlapAdd implements AudioProcessor {
 	}
 	
 	
-	@SuppressLint("Assert") @Override
+	@Override
 	public boolean process(AudioEvent audioEvent) {
 		float[] audioFloatBuffer = audioEvent.getFloatBuffer();
 		if(audioFloatBuffer.length != getInputBufferSize()){
@@ -245,8 +244,6 @@ public class WaveformSimilarityBasedOverlapAdd implements AudioProcessor {
 		
 		audioEvent.setFloatBuffer(outputFloatBuffer);
 		audioEvent.setOverlap(0);
-		
-		System.out.println("WSOLA PARAMETER INPUTBUFFERSIZE " + getInputBufferSize());
 		
 		if(newParameters!=null){
 			applyNewParameters();
@@ -343,9 +340,9 @@ public class WaveformSimilarityBasedOverlapAdd implements AudioProcessor {
 		}
 		
 		public static Parameters musicDefaults(double tempo, double sampleRate){
-			int sequenceMs = 50; //original 82
-			int seekWindowMs = 19; //original 28
-			int overlapMs = 9; //original 12
+			int sequenceMs = 200; //200
+			int seekWindowMs =  20; //20
+			int overlapMs = 2; //2
 			return new Parameters(tempo,sampleRate,sequenceMs, seekWindowMs,overlapMs);
 		}
 		
@@ -372,7 +369,7 @@ public class WaveformSimilarityBasedOverlapAdd implements AudioProcessor {
 			
 			int sequenceMs = (int) (sequenceC + sequenceK * tempo + 0.5);
 			int seekWindowMs =  (int) (seekC + seekK * tempo + 0.5);
-			int overlapMs = 12; //original is 12
+			int overlapMs = 12;
 			return new Parameters(tempo,sampleRate,sequenceMs, seekWindowMs,overlapMs);
 		}
 

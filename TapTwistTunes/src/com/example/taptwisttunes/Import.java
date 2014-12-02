@@ -1,6 +1,7 @@
 package com.example.taptwisttunes;
 
 import java.io.BufferedInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import be.tarsos.dsp.AudioDispatcher;
@@ -26,22 +27,28 @@ import com.example.taptwisttunes.visualizer.renderer.BarGraphRenderer;
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
 import android.util.Log;
+import android.view.DragEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
 public class Import extends ActionBarActivity {
 
 	ImageButton browse, stop, play, pause;
+	SeekBar pitch, tempoS;
 	TextView song;
 	MediaPlayer mediaPlayer;
 	Uri browseUri = null;
@@ -57,6 +64,7 @@ public class Import extends ActionBarActivity {
 	private WaveformSimilarityBasedOverlapAdd wsola;
 	private RateTransposer rateTransposer;
 	private double currentRate;
+	private double tempo;
 	private double sampleRate;
 	InputStream wavStream;
 	private Thread t;
@@ -70,40 +78,76 @@ public class Import extends ActionBarActivity {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_import);
+		tempo = .5;
 
 		browse = (ImageButton) findViewById(R.id.upload);
 		play = (ImageButton) findViewById(R.id.play);
 		pause = (ImageButton) findViewById(R.id.pause);
 		stop = (ImageButton) findViewById(R.id.stop);
 		song = (TextView) findViewById(R.id.songTitle);
+		pitch = (SeekBar) findViewById(R.id.seekBar1);
+		tempoS = (SeekBar) findViewById(R.id.seekBar2);
 
 		songSelected = false;
 		isPlaying = false;
 		
+		song.setText("" + pitch.getProgress());
 		
+		pitch.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+			
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+				// TODO Auto-generated method stub
+				//song.setText("" + pitch.getProgress());
+				rateTransposer.setFactor(currentFactor);
+			}
+			
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+				// TODO Auto-generated method stub
+				//song.setText("" + pitch.getProgress());
+			}
+			
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress,
+					boolean fromUser) {
+				if(pitch.getProgress() == 0){
+					currentFactor = (double)(pitch.getProgress() + 10)/10;
+					//tempo = tempo - .7;
+				}
+				else{
+					currentFactor = (double)pitch.getProgress()/10;
+				}
+				song.setText("" + currentFactor);
+			}
+		});
 		
-		currentFactor = 1;
-		//browseUri = resultData.getData();
-		InputStream wavStream;
-		wavStream = new BufferedInputStream(getResources().openRawResource(R.raw.last_dance_mono));
-		System.out.println("wavStream set successfully");
-		TarsosDSPAudioFormat audioFormat = new TarsosDSPAudioFormat(44100, 16, 1, true, false);
-		UniversalAudioInputStream audioStream = new UniversalAudioInputStream(wavStream, audioFormat);
-		wsola = new WaveformSimilarityBasedOverlapAdd(Parameters.musicDefaults(currentFactor, sampleRate));
-		
-		sampleRate = audioFormat.getSampleRate();
-		Log.i("****SAMPLE RATE*****", "" + sampleRate);
-		
-		AudioDispatcher dispatcher = new AudioDispatcher(audioStream, wsola.getInputBufferSize(), (wsola.getInputBufferSize()/2)); //trying wsola grab
-		AndroidAudioPlayer player = new AndroidAudioPlayer(audioFormat, wsola.getInputBufferSize());
-		
-		//rateTransposer = new RateTransposer(currentFactor);
-		//dispatcher.addAudioProcessor(rateTransposer);
-		dispatcher.addAudioProcessor(player);
-		t = new Thread(dispatcher);
-		t.start();
-		
-		
+		tempoS.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+			
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+				// TODO Auto-generated method stub
+				wsola.setParameters(Parameters.musicDefaults(tempo, sampleRate));
+			}
+			
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress,
+					boolean fromUser) {
+				if(tempoS.getProgress() == 0){
+					tempo = (double)(tempoS.getProgress() + 10)/100;
+				}
+				else{
+					tempo = (double)tempoS.getProgress()/100;
+				}
+				song.setText("" + tempo);				
+			}
+		});
 
 		// this stops the music playing
 		stop.setOnClickListener(new View.OnClickListener() {
@@ -111,11 +155,11 @@ public class Import extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				//if (mediaPlayer != null) {
-					//cleanUp();
-					//currentSongPosition = 0;
-					//isPlaying = false;
-				//}
+				if (mediaPlayer != null) {
+					cleanUp();
+					currentSongPosition = 0;
+					isPlaying = false;
+				}
 			}
 		});
 
@@ -126,15 +170,18 @@ public class Import extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				//if (mediaPlayer != null) {
-					//if (mediaPlayer.isPlaying()) {
-						//currentSongPosition = mediaPlayer.getCurrentPosition();
-						//cleanUp();
-						//isPlaying = false;
-					//}
-				}
+				/*if (mediaPlayer != null) {
+					if (mediaPlayer.isPlaying()) {
+						currentSongPosition = mediaPlayer.getCurrentPosition();
+						cleanUp();
+						isPlaying = false;
+					}
+				}*/
+				
+				currentFactor = currentFactor -.1;
+				rateTransposer.setFactor(currentFactor);
 			}
-		);
+		});
 
 		// mediaPlayer.pause() wasn't working occasionally so instead the
 		// mediaPlayer is released on
@@ -145,9 +192,9 @@ public class Import extends ActionBarActivity {
 
 			@Override
 			public void onClick(View v) {
-				if (songSelected && !isPlaying) { // if no song can't press play
+				/*if (songSelected && !isPlaying) { // if no song can't press play
 					// TODO Auto-generated method stub
-					//initTunnelPlayerWorkaround();
+					initTunnelPlayerWorkaround();
 					if (mediaPlayer != null) {
 						mediaPlayer.release();
 						mediaPlayer = null;
@@ -155,7 +202,7 @@ public class Import extends ActionBarActivity {
 						mVisualizerView.release();
 					}
 					mVisualizerView = (VisualizerView) findViewById(R.id.visualizerView);
-					//addBarGraphRenderers();
+					addBarGraphRenderers();
 					mediaPlayer = new MediaPlayer();
 					mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 					try {
@@ -190,7 +237,10 @@ public class Import extends ActionBarActivity {
 					mVisualizerView.setEnabled(true);
 					mVisualizerView.link(mediaPlayer);
 					isPlaying = true;
-				}
+				}*/
+				
+				currentFactor = currentFactor +.1;
+				rateTransposer.setFactor(currentFactor);
 			}
 		});
 
@@ -224,30 +274,43 @@ public class Import extends ActionBarActivity {
 				&& resultCode == Activity.RESULT_OK) {
 			browseUri = null;
 			if (resultData != null) {
-				//initTunnelPlayerWorkaround();
+				initTunnelPlayerWorkaround();
 				currentFactor = 1;
+				tempo = .5;
 				browseUri = resultData.getData();
-				wavStream = new BufferedInputStream(getResources().openRawResource(R.raw.last_dance_mono));
+				Cursor returnCursor = getContentResolver().query(browseUri, null, null, null, null);
+				int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+				returnCursor.moveToFirst();
+				song.setText(returnCursor.getString(nameIndex));
+				
+				try {
+					wavStream = getContentResolver().openInputStream(browseUri);
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				System.out.println("wavStream set successfully");
 				TarsosDSPAudioFormat audioFormat = new TarsosDSPAudioFormat(44100, 16, 1, true, false);
 				UniversalAudioInputStream audioStream = new UniversalAudioInputStream(wavStream, audioFormat);
-				wsola = new WaveformSimilarityBasedOverlapAdd(Parameters.musicDefaults(currentFactor, sampleRate));
-				
-				
-				
 				sampleRate = audioFormat.getSampleRate();
+				wsola = new WaveformSimilarityBasedOverlapAdd(Parameters.musicDefaults(tempo, sampleRate));
+				
 				Log.i("****SAMPLE RATE*****", "" + sampleRate);
 				
-				AudioDispatcher dispatcher = new AudioDispatcher(audioStream, wsola.getInputBufferSize(), (wsola.getInputBufferSize()/2)); //trying wsola grab
+				AudioDispatcher dispatcher = new AudioDispatcher(audioStream, wsola.getInputBufferSize(), (int)(wsola.getInputBufferSize()/2)); //trying wsola grab
 				AndroidAudioPlayer player = new AndroidAudioPlayer(audioFormat, wsola.getInputBufferSize());
 				
-				//rateTransposer = new RateTransposer(currentFactor);
-				//dispatcher.addAudioProcessor(rateTransposer);
+				wsola.setDispatcher(dispatcher);
+				dispatcher.addAudioProcessor(wsola);
+				wsola.setParameters(Parameters.musicDefaults(tempo, sampleRate));
+				
+				rateTransposer = new RateTransposer(currentFactor);
+				dispatcher.addAudioProcessor(rateTransposer);
 				dispatcher.addAudioProcessor(player);
 				t = new Thread(dispatcher);
 				t.start();
 				
-				/*
+				
 				if (mediaPlayer != null) {
 					cleanUp();
 				}
@@ -282,6 +345,7 @@ public class Import extends ActionBarActivity {
 				}
 				// song plays
 				//mediaPlayer.start();
+				//mediaPlayer.setVolume(0, 0); //trying to silent media player for the visualizer
 				mVisualizerView.setEnabled(true);
 				// We need to link the visualizer view to the media player so
 				// that
@@ -289,7 +353,7 @@ public class Import extends ActionBarActivity {
 				mVisualizerView.link(mediaPlayer);
 				songSelected = true;
 				isPlaying = true;
-				*/
+				
 			}
 		}
 	}
@@ -309,7 +373,6 @@ public class Import extends ActionBarActivity {
 	 * myFile.getAbsolutePath(); return s; }
 	 */
 
-	/*
 	private void cleanUp() {
 		if (mediaPlayer != null) {
 			mVisualizerView.release();
@@ -327,10 +390,10 @@ public class Import extends ActionBarActivity {
 	private void initTunnelPlayerWorkaround() {
 		// Read "tunnel.decode" system property to determine
 		// the workaround is needed
-		if (TunnelPlayerWorkaround.isTunnelDecodeEnabled(this)) {
+		//if (TunnelPlayerWorkaround.isTunnelDecodeEnabled(this)) {
 			mSilentPlayer = TunnelPlayerWorkaround
 					.createSilentMediaPlayer(this);
-		}
+		//}
 	}
 
 	// Method for adding the bar graph visualizer to the the visualizer view
@@ -350,5 +413,5 @@ public class Import extends ActionBarActivity {
 		BarGraphRenderer barGraphRendererTop = new BarGraphRenderer(16, paint2,
 				true);
 		mVisualizerView.addRenderer(barGraphRendererTop);
-	}*/
+	}
 }

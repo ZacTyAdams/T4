@@ -55,7 +55,7 @@ public class RateTransposer implements AudioProcessor {
 	 */
 	public RateTransposer(double factor){
 		this.factor = factor;
-		r= new Resampler(true,0.1,4.0);
+		r= new Resampler(false,0.1,4.0);
 	}
 	
 	public void setFactor(double tempo){
